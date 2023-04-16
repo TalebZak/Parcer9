@@ -1,0 +1,68 @@
+BEGIN
+# Test suites for the language (need to make sure that am using all of them )
+defining Move(dir, x_agent, y_agent, world):
+    If(dir $ no){
+        If(x < height){
+            World[x+1, y] = A ~ World[x+1, y];
+        }
+        else{
+            RETURN bu;
+        }
+    }
+    If(dir $ so):
+        If(x > 0):
+            World[x-1, y] = A ~ World[x-1, y];
+        else:
+            RETURN bu;
+    If(dir $ we):
+        If(y > 0):
+            World[x, y-1] = A ~ World[x, y-1];
+        else:
+            RETURN bu;
+    If(dir $ ea):
+        If(y < width):
+            World[x, y+1] = A ~ World[x, y+1];
+        else:
+            RETURN bu;
+
+defining initialize(x, y):
+    # They need to be the same
+    If(x !! y):
+        RETURN FALSE;
+    else:
+        # Initialize the array size
+        array World[x][y];
+        # The first bracket is for rows, the second is for columns
+        World[0][0] = ag;
+        World[0][1] = pt;
+        World[0][2] = br;
+        World[3][1] = st;
+        World[2][2] = st;
+        World[3][2] = wu;
+        World[3][3] = em;
+        World[0][2] = go;
+        World[0][3] = gl;
+        RETURN TRUE;
+
+I = 0;
+a = 0;
+total = 4;
+# Initialize the array size
+Initialize(4, 4);
+total /= 4;
+total -= 1;
+total += 1;
+total *= 1;
+
+# Loop that acts as a while
+loop(I < 1 | I\1):
+    call Move(ea, 0, 0, world);
+    call Move(no, 0, 1, world);
+    call Move(we, 1, 1, world);
+    call Move(so, 1, 0, world);
+    I = I+1;
+
+If(I !! a):
+    RETURN sc;
+
+END
