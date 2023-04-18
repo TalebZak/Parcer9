@@ -1,11 +1,11 @@
 import os
 import re
 import ply.lex as lex
-token_list_numbers ={'ID':1,'NUM':2,'ID2':4,'COM':5,'ADD':4,'SUB':5,'MUL':6,'DIV':7,'ASSIGN':8,'EQU':9,'SMALL':10,'SMALLQUI':11,
+token_list_numbers ={'ID':1,'NUM':2,'COM':5,'ADD':4,'SUB':5,'MUL':6,'DIV':7,'ASSIGN':8,'EQU':9,'SMALL':10,'SMALLQUI':11,
 'NOTEQUI':12,'OR':13,'AND':14,'NOT':15,'CONCA':16,'DOT':17,'SEMI':18,'ENDL':19,'OPPARENT':20,'CLPARENT':21,'OPBRACE':22,'CLBRACE':23,
 'OPBRACKET':24,'CLBRACKET':25,'LOOP':26,'IF':27,'ELSE':28,'DEFINE':29,'TRUE':30,'FALSE':31,'BEGIN':32,'END':33,'RETURN':34,
 'WU':35,'AG':37,'PT':38,'GO':39,'BR':40,'GL':41,'ST':41,'EM':42,'SC':43,'BU':44,'EA':45,'WE':46,'SO':47,'NO':48,'ENDL':49, 'ARRAY':50, 'CALL':51}
-reserved_list =['loop','if','else','define','TRUE','FALSE','BEGIN','END','RETURN','wu','ag','pt','go','br','gl','st','em','sc','bu','ea','we','so','no', 'array', 'call']
+reserved_list =['loop','if','else','define','TRUE','FALSE','BEGIN','END','return','wu','ag','pt','go','br','gl','st','em','sc','bu','ea','we','so','no', 'array', 'call']
 lexim_token_opearator={'+':'ADD','-':'SUB','*':'MUL','/':'DIV','=':'ASSIGN','$':'EQU','<':'SMALL','\\':'SMALLQUI','!':'NOTEQUI','|':'OR','&':'AND','!!':'NOT','~':'CONCA'}
 lexim_token_punctuation={'.':'DOT',',':'SEMI',';':'ENDL','(':'OPPARENT',')':'CLPARENT','{':'OPBRACE','}':'CLBRACE','[':'OPBRACKET',']':'CLBRACKET'}
 # reserved_list[i] : reserved_list[i].upper()
@@ -14,7 +14,6 @@ for word in reserved_list:
     reserved[word] = word.upper()
 
 tokens = list(reserved.values()) + list(lexim_token_opearator.values()) + list(lexim_token_punctuation.values()) + ['ID','NUM']
-
 
 t_ignore = ' \t'
 t_ignore_COMMENT = r'\#.*'
@@ -68,7 +67,7 @@ lexer = lex.lex()
 
 def main():
     print('here in main')
-    file = open("testcode.txt","r")
+    file = open("testdoc.txt","r")
     data = file.read()
     lexer.input(data)
     print('here')

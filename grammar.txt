@@ -2,7 +2,7 @@
 <main_body>::= BEGIN <array_declarations> [<statements>] END
 <function>::= DEFINE ID OPPARENT [<function_def_parameters>] CLPARENT OPCURL <statement> {statements} CLCURL
 <function_def_parameters>::= [ARRAY] ID {SEMI [ARRAY] ID}
-<variable> ::= ID |ARRAY ID [<array_idxing_expr>]
+<variable> ::= ID [<array_idxing_expr>]
 <statement>::= ( <function_call> | <loop> | <if_statement> | <assignment_expression> | <array_declaration> | <array_idxing_expr> | <return> ) ENDL
 <return>::= RETURN [<value>] 
 <function_call>::= CALL ID OPPARENT [<arguments>] CLPARENT

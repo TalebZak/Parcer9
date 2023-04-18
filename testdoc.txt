@@ -1,42 +1,17 @@
-#Case 1: an arary is defined in the begining and there is one function and a main:
-array world[5][5];  
-define place_wumpus( x,y){
-    array world[x][Y]= wu
-}
-define place_gold(x,y, array world){
-world[x][y]= gl
-}
-define place_pit(x,y,array world){
-world[x][y]= pi
-}
-define place_agent(x,y,array world){
-world[x][y]= ag
-}
-define shoot(dire, x, y){
-    if(dir = north){
-        if(array World[x+1][Y]$w){
-        clearRoom(w);
-    return scream;
-
-         }
+define sum ( ARRAY a, ARRAY b, n ) {
+    loop ( a < n & b < n ) {
+        a = a + b;
+        n = n - 1;
     }
+    return a;
 }
-
-begin 
-array World[4][4] = 0;
-call Place_agent(0,0,array world);
-call Place_pit(0,1,array world);
-call Place_wumpus(1,0,array world);
-call shoot(north, 2, 6 );
-end
-#case 2: no function no arary:
-begin
-a = 5;
-b= 6;
-if (a>b){
-    
-}
-else{
-    
-}
-end
+BEGIN
+    n = 5;
+    sum, idx;
+    idx = 0;
+    sum = 0;
+    loop (idx < n) {
+        idx = idx + 1;
+        sum = sum + idx;
+    }
+END
