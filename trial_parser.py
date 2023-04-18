@@ -77,6 +77,10 @@ class WumpusWorldParser:
             self.current_token += 1
             children.append(self.size())
             children.append(self.size())
+            if not self.match_token("ENDL"):
+                raise SyntaxError("Expected ENDL")
+            self.current_token += 1
+            children.append(Node("ENDL"))
         except SyntaxError as e:
             print("Syntax error at line {}: {}".format(self.tokens[self.current_token][2], e))
             sys.exit(1)
@@ -488,7 +492,10 @@ class WumpusWorldParser:
                 children.append(self.array_declaration())
             while self.match_token("CALL") or self.match_token("LOOP") or self.match_token("IF") or self.match_token("ID") or self.match_token("RETURN"):
                 children.append(self.statement())
+            print(children)
+            print(self.tokens[self.current_token])
             if not self.match_token("END"):
+                
                 raise SyntaxError("Expected END token")
             children.append(Node("END"))
             self.current_token += 1
@@ -531,8 +538,9 @@ class WumpusWorldParser:
             children.append(Node("CLBRACE"))
         except SyntaxError as e:
             print(e)
-            sys.exit(1)
             return Node("function", children=children)
+            sys.exit(1)
+            
     
     def language(self):
         functions = []

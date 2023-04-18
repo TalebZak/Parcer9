@@ -1,12 +1,5 @@
-define sum ( ARRAY a, ARRAY b,n ) {
-    loop ( a < n & b < n ) {
-        a = a + b;
-        n = n - 1;
-    }
-    return a;
-}
 BEGIN
-    array a[5][5];
+    array a[5][5]
     n = 5;
     idx = 0;
     sum = 0;
