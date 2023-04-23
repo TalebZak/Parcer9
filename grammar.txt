@@ -14,7 +14,7 @@
 <expression>::= <function_call> | <value> [<addop> { <addop> }] 
 <addop>::= ( ADD | SUB ) <value> | <multiplication>
 <multiplication>::= ( MUL | DIV ) <value>
-<array_declaration>::= ARRAY ID <size> <size>
+<array_declaration>::= ARRAY ID <size> <size> ENDL
 <size> ::= OPBRACK NUM CLBRACKET
 <array_idxing_expr> ::= <placing> <placing>
 <placing> ::= OPBRACK (ID | NUM) CLBRACKET

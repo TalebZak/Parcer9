@@ -1,0 +1,47 @@
+#testing multiple functions
+define ID(x){
+x = x + 1;
+return x; #returning a value
+};
+define ADD(x,Y){
+x = x + 1;
+return x; #returning normal value
+};
+define foo(x,y,z, array a){
+    if(a\b & b<c){
+        a = b;
+    }; 
+    return wu; #returning a variable
+};
+define f3(c,v){
+    a=  call foo(a,a[i][1]); #ASSIGNn an expression and function call and all of that jaz
+    b = a+b+c-b*n/8; # just trying to use all of the additives o sf
+    return a[2][6]; #returning ana array
+};
+define f4(){
+    return 0; #returning a value
+};
+
+BEGIN
+    array a[5][5]; #array declaration
+    n[3][8] = 5; #array assignment
+    a[3][8] = 5 +6 + a[8][9]; #array assignment
+    
+    call foo(2,3,4, a [2][6]);
+    n = 5;
+    idx = 0;
+    sum = 0;
+    loop (idx < n) {
+        idx = idx + 1;
+        sum = sum + idx;
+        return TRUE; 
+        return FALSE;
+        return a;
+    };
+    if (a<b !! c<d & e<f | g<h) {
+        a=m;
+    }
+    else { #testing else and if statements
+        a=n;
+    };   
+END

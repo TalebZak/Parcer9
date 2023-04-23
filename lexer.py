@@ -1,6 +1,7 @@
 import os
 import re
 import ply.lex as lex
+import sys
 token_list_numbers ={'ID':1,'NUM':2,'COM':5,'ADD':4,'SUB':5,'MUL':6,'DIV':7,'ASSIGN':8,'EQU':9,'SMALL':10,'SMALLQUI':11,
 'NOTEQUI':12,'OR':13,'AND':14,'NOT':15,'CONCA':16,'DOT':17,'SEMI':18,'ENDL':19,'OPPARENT':20,'CLPARENT':21,'OPBRACE':22,'CLBRACE':23,
 'OPBRACKET':24,'CLBRACKET':25,'LOOP':26,'IF':27,'ELSE':28,'DEFINE':29,'TRUE':30,'FALSE':31,'BEGIN':32,'END':33,'RETURN':34,
@@ -65,9 +66,10 @@ def t_newline(t):
 
 lexer = lex.lex()
 
-def main():
+def main(file_name):
     print('here in main')
-    file = open("testdoc.txt","r")
+    # open the file
+    file = open(file_name,"r")
     data = file.read()
     lexer.input(data)
     print('here')
@@ -80,10 +82,10 @@ def main():
             break
         print(tok)
         # write only tok.type and tok.value and tok.lineno and tok.number
-        file.write(str(tok.type) + " " + str(tok.value) + " " + str(tok.lineno) + " " + str(token_list_numbers[tok.type]))
+        file.write(str(tok.type) + " " + str(tok.value) + " " + str(tok.lineno) + " " + str(tok.lexpos))
         file.write("\n")
     file.close()
 
 
 if __name__ == '__main__':
-    main()
+    main(sys.argv[1])
