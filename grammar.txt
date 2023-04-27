@@ -8,12 +8,11 @@
 <function_call>::= CALL ID OPPARENT [<arguments>] CLPARENT
 <arguments> ::= <value> {SEMI <value>}
 <value>::= NUM | ID [<array_idxing_expr>] | WU | AG | PT | GO | BR | GL | ST | EM | SC | BU | EA | WE | SO | NO | TRUE | FALSE
-<condition> ::= OPPARENT <comparison> { (NOT | AND | OR) <comparison> } CLPARENT
+<condition> ::= OPPARENT <comparison> { (AND | OR) <comparison> } CLPARENT
 <comparison> ::= <value> (EQU | SMALL | SMALLQUI | NOTEQUI) <value>
 <assignment_expression>::= <variable> ASSIGN <expression>
-<expression>::= <function_call> | <value> [<addop> { <addop> }] 
-<addop>::= ( ADD | SUB ) <value> | <multiplication>
-<multiplication>::= ( MUL | DIV ) <value>
+<expression>::= <function_call> | <addop> { (ADD | SUB) <addop> }
+<addop>::= <value> {( MUL | DIV ) <value>}
 <array_declaration>::= ARRAY ID <size> <size> ENDL
 <size> ::= OPBRACK NUM CLBRACKET
 <array_idxing_expr> ::= <placing> <placing>

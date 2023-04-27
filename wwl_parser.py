@@ -2,39 +2,6 @@ import sys
 from anytree import Node, RenderTree
 from anytree.exporter import JsonExporter, DotExporter
 import json
-
-'''
-<language> ::= {<function>} <main_body>
-<main_body>::= BEGIN <array_declaration> {<array_declaration>} {<statement>} END
-<function>::= DEFINE ID OPPARENT [<function_def_parameters>] CLPARENT OPBRACE {statement} CLBRACE
-<function_def_parameters>::= [ARRAY] ID {SEMI [ARRAY] ID}
-<variable> ::= ID [<array_idxing_expr>]
-<statement>::= ( <function_call> | <loop> | <if_statement> | <assignment_expression> | <return> ) ENDL
-<return>::= RETURN [<value>]
-<function_call>::= CALL ID OPPARENT [<arguments>] CLPARENT
-<arguments> ::= <value> {SEMI <value>}
-<value>::= NUM | ID [<array_idxing_expr>] | WU | AG | PT | GO | BR | GL | ST | EM | SC | BU | EA | WE | SO | NO | TRUE | FALSE
-<condition> ::= OPPARENT <comparison> { (NOT | AND | OR) <comparison> } CLPARENT
-<comparison> ::= <value> (EQU | SMALL | SMALLQUI | NOTEQUI) <value>
-<assignment_expression>::= <variable> ASSIGN <expression>
-<expression>::= <function_call> | <value> [<addop> { <addop> }] 
-<addop>::= ( ADD | SUB ) <value> | <multiplication>
-<multiplication>::= ( MUL | DIV ) <value>
-<array_declaration>::= ARRAY ID <size> <size>
-<size> ::= OPBRACK NUM CLBRACKET
-<array_idxing_expr> ::= <placing> <placing>
-<placing> ::= OPBRACK (ID | NUM) CLBRACKET
-<loop>::= LOOP <condition> OPBRACE {<statement>} CLBRACE
-<if_statement>::= IF <condition> OPBRACE {<statement>} CLBRACE [<else_statement>]
-<else_statement>::= ELSE OPBRACE {<statement>} CLBRACE
-'''
-
-# Token types
-TOKEN_TYPE = 0
-TOKEN_VALUE = 1
-TOKEN_LINE = 2
-TOKEN_SYMBOL_TABLE_VALUE = 3
-
 # Define the parser class
 class WumpusWorldParser:
     def __init__(self, file_name):
@@ -83,7 +50,6 @@ class WumpusWorldParser:
             if not self.match_token("ENDL"):
                 raise SyntaxError("Expected ENDL")
             self.current_token += 1
-            children.append(Node("ENDL"))
         except SyntaxError as e:
             print("Syntax error at line {}: {}".format(self.tokens[self.current_token][2], e))
             sys.exit(1)
@@ -123,7 +89,7 @@ class WumpusWorldParser:
         if self.match_token("ID"):
             children.append(Node("ID", val=self.tokens[self.current_token][1], line=int(self.tokens[self.current_token][2])))
         elif self.match_token("NUM"):
-            children.append(Node("NUM"), val=int(self.tokens[self.current_token][1]))
+            children.append(Node("NUM", val=int(self.tokens[self.current_token][1])))
         else:
             raise SyntaxError("Expected ID or NUM")
         self.current_token += 1
@@ -154,7 +120,7 @@ class WumpusWorldParser:
             raise SyntaxError(f"Expected ENDL, current token: {self.tokens[self.current_token]}")
         
         self.current_token += 1
-        return Node("statement", children=[stmt, Node("ENDL")])
+        return Node("statement", children=[stmt])
     
     def function_call(self):
         self.match_token("CALL")
@@ -211,9 +177,10 @@ class WumpusWorldParser:
     
     def if_statement(self):
         #IF <condition> OPBRACE {<statement>} CLBRACE [<else_statement>]
-        self.match_token("IF")
+        
         self.current_token += 1
         children = []
+        children.append(Node("IF"))
         try:
             children.append(self.condition())
             if not self.match_token("OPBRACE"):
@@ -236,9 +203,10 @@ class WumpusWorldParser:
     def else_statement(self):
 
         # ELSE OPBRACE {<statement>} CLBRACE
-        self.match_token("ELSE")
+
         self.current_token += 1
         children = []
+        children.append(Node("ELSE"))
         try:
             if not self.match_token("OPBRACE"):
                 raise SyntaxError("Expected OPBRACE")
@@ -273,18 +241,22 @@ class WumpusWorldParser:
         return Node("arguments", children=children)
     
     def expression(self):
-        # <expression>::= <function_call> | <value> [<addop> { <addop> }]
+        # <expression>::= <function_call> | <addop> { (ADD | SUB) <addop> }
         children = []
         try:
             if self.match_token("CALL"):
                 children.append(self.function_call())
             else:
                 
-                children.append(self.value())
-                if self.match_token("ADD") or self.match_token("SUB") or self.match_token("MUL") or self.match_token("DIV"):
+                children.append(self.addop())
+                
+                while self.match_token("ADD") or self.match_token("SUB"):
+                    if self.match_token("ADD"):
+                        children.append(Node("ADD"))
+                    else:
+                        children.append(Node("SUB"))
+                    self.current_token += 1
                     children.append(self.addop())
-                    while self.match_token("ADD") or self.match_token("SUB") or self.match_token("MUL") or self.match_token("DIV"):
-                        children.append(self.addop())
         except SyntaxError as e:
             print(e)
             sys.exit(1)
@@ -293,34 +265,18 @@ class WumpusWorldParser:
     def addop(self):
         children = []
         try:
-            if self.match_token("ADD") or self.match_token("SUB"):
-                if self.match_token("ADD"):
-                    children.append(Node("ADD"))
+            children.append(self.value())
+            while self.match_token("MUL") or self.match_token("DIV"):
+                if self.match_token("MUL"):
+                    children.append(Node("MUL"))
                 else:
-                    children.append(Node("SUB"))
+                    children.append(Node("DIV"))
                 self.current_token += 1
                 children.append(self.value())
-            elif self.match_token("MUL") or self.match_token("DIV"):
-
-                children.append(self.multiplication())
         except SyntaxError as e:
             print(e)
             sys.exit(1)
         return Node("addop", children=children)
-    
-    def multiplication(self):
-        children = []
-        try:
-            if self.match_token("MUL"):
-                children.append(Node("MUL"))
-            else:
-                children.append(Node("DIV"))
-            self.current_token += 1
-            children.append(self.value())
-        except SyntaxError as e:
-            print(e)
-            sys.exit(1)
-        return Node("multiplication", children=children)
     
     def value(self):
         # NUM | ID [<array_idxing_expr>] | WU | AG | PT | GO | BR | GL | ST | EM | SC | BU | EA | WE | SO | NO
@@ -484,7 +440,6 @@ class WumpusWorldParser:
             while self.match_token("CALL") or self.match_token("LOOP") or self.match_token("IF") or self.match_token("ID") or self.match_token("RETURN"):
                 children.append(self.statement())
             print(children)
-            print(self.tokens[self.current_token])
             
             if not self.match_token("END"):
                 
@@ -527,7 +482,6 @@ class WumpusWorldParser:
                 children.append(self.statement())
             if not self.match_token("CLBRACE"):
                 
-                print(self.tokens[self.current_token])
                 raise SyntaxError("Expected CLBRACE token")
             self.current_token += 1
             children.append(Node("CLBRACE"))
@@ -546,7 +500,11 @@ class WumpusWorldParser:
                 self.current_token += 1
             print()    
             main_body = self.main_body()
-            return Node("language", children=functions + [main_body])
+            node = Node("language", children=functions + [main_body])
+            if self.current_token != len(self.tokens):
+                print("Error: unexpected token at line %d" % int(self.tokens[self.current_token][2]))
+                sys.exit(1)
+            return node
         except SyntaxError as e:
             print(e)
             sys.exit(1)

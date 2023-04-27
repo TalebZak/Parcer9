@@ -105,6 +105,22 @@ def build_symbol_table(parse_tree):
                                 'type': 'array' if is_array else 'not_array', 
                                 'scope': func_id
                             })
+                            '''
+                define x(array var){
+                    var = 5;
+                }
+                x:{
+                type: function,
+                scope: global,
+                parameters: [
+                    {
+                        name: var,
+                        type: array,
+                        scope: x,
+                    }
+                ]
+                }
+                            '''
                 if child['name'] == 'statement':
                     traverse(child['children'][0], False, func_id)
         if node['name'] == 'assignment_expression':
