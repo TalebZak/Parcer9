@@ -1,558 +1,400 @@
 {
-    "name": "language",
-    "children": [
+  "name": "PROGRAM",
+  "children": [
+    {
+      "name": "DEFINE",
+      "children": [
         {
-            "name": "function",
-            "children": [
-                {
-                    "name": "DEFINE",
-                    "children": []
-                },
-                {
-                    "val": "ID",
-                    "line": 1,
-                    "name": "ID",
-                    "children": []
-                },
-                {
-                    "name": "OPPARENT",
-                    "children": []
-                },
-                {
-                    "name": "function_def_parameters",
-                    "children": [
-                        {
-                            "name": "ARRAY",
-                            "children": []
-                        },
-                        {
-                            "val": "i",
-                            "line": 1,
-                            "name": "ID",
-                            "children": []
-                        },
-                        {
-                            "name": "SEMI",
-                            "children": []
-                        },
-                        {
-                            "val": "x",
-                            "line": 1,
-                            "name": "ID",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "CLPARENT",
-                    "children": []
-                },
-                {
-                    "name": "OPBRACE",
-                    "children": []
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "assignment_expression",
-                            "children": [
-                                {
-                                    "val": "z",
-                                    "line": 2,
-                                    "name": "ID",
-                                    "children": []
-                                },
-                                {
-                                    "name": "ASSIGN",
-                                    "children": []
-                                },
-                                {
-                                    "name": "expression",
-                                    "children": [
-                                        {
-                                            "val": "x",
-                                            "line": 2,
-                                            "name": "ID",
-                                            "children": []
-                                        },
-                                        {
-                                            "name": "addop",
-                                            "children": [
-                                                {
-                                                    "name": "ADD",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "val": 1,
-                                                    "name": "NUM",
-                                                    "children": []
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "return",
-                            "children": [
-                                {
-                                    "name": "RETURN",
-                                    "children": []
-                                },
-                                {
-                                    "val": "x",
-                                    "line": 3,
-                                    "name": "ID",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "CLBRACE",
-                    "children": []
-                }
-            ]
+          "val": "test1",
+          "line": 1,
+          "name": "ID"
         },
         {
-            "name": "function",
-            "children": [
+          "name": "PARAMS",
+          "children": [
+            {
+              "val": "i",
+              "line": 1,
+              "name": "ID",
+              "children": [
                 {
-                    "name": "DEFINE",
-                    "children": []
-                },
-                {
-                    "val": "ADD",
-                    "line": 5,
-                    "name": "ID",
-                    "children": []
-                },
-                {
-                    "name": "OPPARENT",
-                    "children": []
-                },
-                {
-                    "val": "y",
-                    "line": 5,
-                    "name": "ID",
-                    "children": []
-                },
-                {
-                    "name": "CLPARENT",
-                    "children": []
-                },
-                {
-                    "name": "OPBRACE",
-                    "children": []
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "assignment_expression",
-                            "children": [
-                                {
-                                    "val": "y",
-                                    "line": 6,
-                                    "name": "ID",
-                                    "children": []
-                                },
-                                {
-                                    "name": "ASSIGN",
-                                    "children": []
-                                },
-                                {
-                                    "name": "expression",
-                                    "children": [
-                                        {
-                                            "val": "y",
-                                            "line": 6,
-                                            "name": "ID",
-                                            "children": []
-                                        },
-                                        {
-                                            "name": "addop",
-                                            "children": [
-                                                {
-                                                    "name": "ADD",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "val": 1,
-                                                    "name": "NUM",
-                                                    "children": []
-                                                }
-                                            ]
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "return",
-                            "children": [
-                                {
-                                    "name": "RETURN",
-                                    "children": []
-                                },
-                                {
-                                    "val": "y",
-                                    "line": 7,
-                                    "name": "ID",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "CLBRACE",
-                    "children": []
+                  "name": "ARRAY"
                 }
-            ]
+              ]
+            },
+            {
+              "val": "x",
+              "line": 1,
+              "name": "ID"
+            }
+          ]
         },
         {
-            "name": "main_body",
-            "children": [
+          "name": "ASSIGN",
+          "children": [
+            {
+              "line": 2,
+              "val": "z",
+              "name": "ID"
+            },
+            {
+              "name": "ADD",
+              "children": [
                 {
-                    "name": "BEGIN",
-                    "children": []
+                  "line": 2,
+                  "val": "x",
+                  "name": "ID"
                 },
                 {
-                    "name": "array_declaration",
-                    "children": [
-                        {
-                            "name": "ARRAY",
-                            "children": []
-                        },
-                        {
-                            "val": "a",
-                            "line": 10,
-                            "name": "ID",
-                            "children": []
-                        },
-                        {
-                            "name": "size",
-                            "children": [
-                                {
-                                    "name": "OPBRACKET",
-                                    "children": []
-                                },
-                                {
-                                    "val": 5,
-                                    "name": "NUM",
-                                    "children": []
-                                },
-                                {
-                                    "name": "CLBRACKET",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "size",
-                            "children": [
-                                {
-                                    "name": "OPBRACKET",
-                                    "children": []
-                                },
-                                {
-                                    "val": 5,
-                                    "name": "NUM",
-                                    "children": []
-                                },
-                                {
-                                    "name": "CLBRACKET",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "assignment_expression",
-                            "children": [
-                                {
-                                    "val": "n",
-                                    "line": 11,
-                                    "name": "ID",
-                                    "children": []
-                                },
-                                {
-                                    "name": "ASSIGN",
-                                    "children": []
-                                },
-                                {
-                                    "val": 5,
-                                    "name": "NUM",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "assignment_expression",
-                            "children": [
-                                {
-                                    "val": "idx",
-                                    "line": 12,
-                                    "name": "ID",
-                                    "children": []
-                                },
-                                {
-                                    "name": "ASSIGN",
-                                    "children": []
-                                },
-                                {
-                                    "val": 0,
-                                    "name": "NUM",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "assignment_expression",
-                            "children": [
-                                {
-                                    "val": "sum",
-                                    "line": 13,
-                                    "name": "ID",
-                                    "children": []
-                                },
-                                {
-                                    "name": "ASSIGN",
-                                    "children": []
-                                },
-                                {
-                                    "val": 0,
-                                    "name": "NUM",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "statement",
-                    "children": [
-                        {
-                            "name": "loop",
-                            "children": [
-                                {
-                                    "name": "LOOP",
-                                    "children": []
-                                },
-                                {
-                                    "name": "condition",
-                                    "children": [
-                                        {
-                                            "name": "OPPARENT",
-                                            "children": []
-                                        },
-                                        {
-                                            "name": "comparison",
-                                            "children": [
-                                                {
-                                                    "val": "idx",
-                                                    "line": 14,
-                                                    "name": "ID",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "name": "SMALL",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "val": "n",
-                                                    "line": 14,
-                                                    "name": "ID",
-                                                    "children": []
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "name": "CLPARENT",
-                                            "children": []
-                                        }
-                                    ]
-                                },
-                                {
-                                    "name": "OPBRACE",
-                                    "children": []
-                                },
-                                {
-                                    "name": "statement",
-                                    "children": [
-                                        {
-                                            "name": "assignment_expression",
-                                            "children": [
-                                                {
-                                                    "val": "idx",
-                                                    "line": 15,
-                                                    "name": "ID",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "name": "ASSIGN",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "name": "expression",
-                                                    "children": [
-                                                        {
-                                                            "val": "idx",
-                                                            "line": 15,
-                                                            "name": "ID",
-                                                            "children": []
-                                                        },
-                                                        {
-                                                            "name": "addop",
-                                                            "children": [
-                                                                {
-                                                                    "name": "ADD",
-                                                                    "children": []
-                                                                },
-                                                                {
-                                                                    "val": 1,
-                                                                    "name": "NUM",
-                                                                    "children": []
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "name": "ENDL",
-                                            "children": []
-                                        }
-                                    ]
-                                },
-                                {
-                                    "name": "statement",
-                                    "children": [
-                                        {
-                                            "name": "assignment_expression",
-                                            "children": [
-                                                {
-                                                    "val": "sum",
-                                                    "line": 16,
-                                                    "name": "ID",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "name": "ASSIGN",
-                                                    "children": []
-                                                },
-                                                {
-                                                    "name": "expression",
-                                                    "children": [
-                                                        {
-                                                            "val": "sum",
-                                                            "line": 16,
-                                                            "name": "ID",
-                                                            "children": []
-                                                        },
-                                                        {
-                                                            "name": "addop",
-                                                            "children": [
-                                                                {
-                                                                    "name": "ADD",
-                                                                    "children": []
-                                                                },
-                                                                {
-                                                                    "val": "idx",
-                                                                    "line": 16,
-                                                                    "name": "ID",
-                                                                    "children": []
-                                                                }
-                                                            ]
-                                                        }
-                                                    ]
-                                                }
-                                            ]
-                                        },
-                                        {
-                                            "name": "ENDL",
-                                            "children": []
-                                        }
-                                    ]
-                                },
-                                {
-                                    "name": "CLBRACE",
-                                    "children": []
-                                }
-                            ]
-                        },
-                        {
-                            "name": "ENDL",
-                            "children": []
-                        }
-                    ]
-                },
-                {
-                    "name": "END",
-                    "children": []
+                  "val": 1,
+                  "name": "NUM"
                 }
-            ]
+              ]
+            }
+          ]
+        },
+        {
+          "name": "RETURN",
+          "children": [
+            {
+              "line": 3,
+              "val": "x",
+              "name": "ID"
+            }
+          ]
         }
-    ]
+      ]
+    },
+    {
+      "name": "DEFINE",
+      "children": [
+        {
+          "val": "test2",
+          "line": 5,
+          "name": "ID"
+        },
+        {
+          "name": "PARAMS",
+          "children": [
+            {
+              "val": "y",
+              "line": 5,
+              "name": "ID"
+            }
+          ]
+        },
+        {
+          "name": "ASSIGN",
+          "children": [
+            {
+              "line": 6,
+              "val": "y",
+              "name": "ID"
+            },
+            {
+              "name": "ADD",
+              "children": [
+                {
+                  "line": 6,
+                  "val": "y",
+                  "name": "ID"
+                },
+                {
+                  "val": 1,
+                  "name": "NUM"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "RETURN",
+          "children": [
+            {
+              "line": 7,
+              "val": "y",
+              "name": "ID"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "BODY",
+      "children": [
+        {
+          "line": 10,
+          "val": "a",
+          "name": "ID",
+          "children": [
+            {
+              "name": "ARRAY"
+            },
+            {
+              "name": "NUM"
+            },
+            {
+              "name": "NUM"
+            }
+          ]
+        },
+        {
+          "name": "ASSIGN",
+          "children": [
+            {
+              "line": 11,
+              "val": "n",
+              "name": "ID"
+            },
+            {
+              "val": 5,
+              "name": "NUM"
+            }
+          ]
+        },
+        {
+          "name": "ASSIGN",
+          "children": [
+            {
+              "line": 12,
+              "val": "idx",
+              "name": "ID"
+            },
+            {
+              "val": 0,
+              "name": "NUM"
+            }
+          ]
+        },
+        {
+          "name": "ASSIGN",
+          "children": [
+            {
+              "line": 13,
+              "val": "sum",
+              "name": "ID"
+            },
+            {
+              "val": 0,
+              "name": "NUM"
+            }
+          ]
+        },
+        {
+          "name": "LOOP",
+          "children": [
+            {
+              "name": "AND",
+              "children": [
+                {
+                  "name": "SMALL",
+                  "children": [
+                    {
+                      "line": 14,
+                      "val": "idx",
+                      "name": "ID"
+                    },
+                    {
+                      "line": 14,
+                      "val": "n",
+                      "name": "ID"
+                    }
+                  ]
+                },
+                {
+                  "name": "SMALL",
+                  "children": [
+                    {
+                      "line": 14,
+                      "val": "sum",
+                      "name": "ID"
+                    },
+                    {
+                      "val": 10,
+                      "name": "NUM"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "ASSIGN",
+              "children": [
+                {
+                  "line": 15,
+                  "val": "idx",
+                  "name": "ID"
+                },
+                {
+                  "name": "ADD",
+                  "children": [
+                    {
+                      "line": 15,
+                      "val": "idx",
+                      "name": "ID"
+                    },
+                    {
+                      "val": 1,
+                      "name": "NUM"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "ASSIGN",
+              "children": [
+                {
+                  "line": 16,
+                  "val": "sum",
+                  "name": "ID"
+                },
+                {
+                  "name": "ADD",
+                  "children": [
+                    {
+                      "line": 16,
+                      "val": "a",
+                      "name": "ID",
+                      "children": [
+                        {
+                          "val": 0,
+                          "name": "NUM"
+                        },
+                        {
+                          "val": 1,
+                          "name": "NUM"
+                        }
+                      ]
+                    },
+                    {
+                      "name": "MUL",
+                      "children": [
+                        {
+                          "line": 16,
+                          "val": "idx",
+                          "name": "ID"
+                        },
+                        {
+                          "name": "MUL",
+                          "children": [
+                            {
+                              "line": 16,
+                              "val": "sum",
+                              "name": "ID"
+                            },
+                            {
+                              "line": 16,
+                              "val": "sum",
+                              "name": "ID"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "IF",
+          "children": [
+            {
+              "name": "SMALL",
+              "children": [
+                {
+                  "line": 19,
+                  "val": "sum",
+                  "name": "ID"
+                },
+                {
+                  "val": 10,
+                  "name": "NUM"
+                }
+              ]
+            },
+            {
+              "name": "ASSIGN",
+              "children": [
+                {
+                  "line": 20,
+                  "val": "sum",
+                  "name": "ID"
+                },
+                {
+                  "name": "ADD",
+                  "children": [
+                    {
+                      "line": 20,
+                      "val": "sum",
+                      "name": "ID"
+                    },
+                    {
+                      "val": 1,
+                      "name": "NUM"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "ELSE",
+              "children": [
+                {
+                  "name": "ASSIGN",
+                  "children": [
+                    {
+                      "line": 22,
+                      "val": "sum",
+                      "name": "ID"
+                    },
+                    {
+                      "name": "SUB",
+                      "children": [
+                        {
+                          "line": 22,
+                          "val": "sum",
+                          "name": "ID"
+                        },
+                        {
+                          "val": 1,
+                          "name": "NUM"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "ASSIGN",
+                  "children": [
+                    {
+                      "line": 23,
+                      "val": "sum",
+                      "name": "ID"
+                    },
+                    {
+                      "name": "ADD",
+                      "children": [
+                        {
+                          "line": 23,
+                          "val": "sum",
+                          "name": "ID"
+                        },
+                        {
+                          "val": 1,
+                          "name": "NUM"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

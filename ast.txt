@@ -1,0 +1,83 @@
+PROGRAM
+├── DEFINE
+│   ├── ID
+│   ├── PARAMS
+│   │   ├── ID
+│   │   │   └── ARRAY
+│   │   └── ID
+│   ├── ASSIGN
+│   │   ├── ID
+│   │   └── ADD
+│   │       ├── ID
+│   │       └── NUM
+│   └── RETURN
+│       └── ID
+├── DEFINE
+│   ├── ID
+│   ├── PARAMS
+│   │   └── ID
+│   ├── ASSIGN
+│   │   ├── ID
+│   │   └── ADD
+│   │       ├── ID
+│   │       └── NUM
+│   └── RETURN
+│       └── ID
+└── BODY
+    ├── ID
+    │   ├── ARRAY
+    │   ├── NUM
+    │   └── NUM
+    ├── ASSIGN
+    │   ├── ID
+    │   └── NUM
+    ├── ASSIGN
+    │   ├── ID
+    │   └── NUM
+    ├── ASSIGN
+    │   ├── ID
+    │   └── NUM
+    ├── LOOP
+    │   ├── AND
+    │   │   ├── SMALL
+    │   │   │   ├── ID
+    │   │   │   └── ID
+    │   │   └── SMALL
+    │   │       ├── ID
+    │   │       └── NUM
+    │   ├── ASSIGN
+    │   │   ├── ID
+    │   │   └── ADD
+    │   │       ├── ID
+    │   │       └── NUM
+    │   └── ASSIGN
+    │       ├── ID
+    │       └── ADD
+    │           ├── ID
+    │           │   ├── NUM
+    │           │   └── NUM
+    │           └── MUL
+    │               ├── ID
+    │               └── MUL
+    │                   ├── ID
+    │                   └── ID
+    └── IF
+        ├── SMALL
+        │   ├── ID
+        │   └── NUM
+        ├── ASSIGN
+        │   ├── ID
+        │   └── ADD
+        │       ├── ID
+        │       └── NUM
+        └── ELSE
+            ├── ASSIGN
+            │   ├── ID
+            │   └── SUB
+            │       ├── ID
+            │       └── NUM
+            └── ASSIGN
+                ├── ID
+                └── ADD
+                    ├── ID
+                    └── NUM

@@ -27,4 +27,13 @@ if [ $? -ne 0 ]; then
     exit 3
 fi
 
+# Run the wwl_parser.py script
+python semantics.py
+
+# Check if the wwl_parser.py script executed successfully
+if [ $? -ne 0 ]; then
+    echo "Error: semantics failed."
+    exit 3
+fi
+
 echo "Script execution completed successfully."
