@@ -3,6 +3,31 @@ from anytree import Node, RenderTree
 from anytree.exporter import JsonExporter, DotExporter
 import json
 # Define the parser class
+'''
+<language> ::= <world_declaration> {<array_declaration>} {<function>} <main_body>
+<main_body>::= BEGIN {<statement>} END
+<function>::= DEFINE ID OPPARENT [<function_def_parameters>] CLPARENT OPCURL {statement} CLCURL
+<function_def_parameters>::= ID {SEMI ID}
+<variable> ::= ID [<array_idxing_expr>]
+<world_declaration>::= WORLD <size> <size> ENDL
+<statement>::= ( <function_call> | <loop> | <if_statement> | <assignment_expression> | <return> | <var_declaration> | <) ENDL
+<return>::= RETURN [<value>]
+<function_call>::= CALL ID OPPARENT [<arguments>] CLPARENT
+<arguments> ::= <value> {SEMI <value>}
+<value>::= NUM | <variable> | TRUE | FALSE
+<condition> ::= OPPARENT <comparison> { (AND | OR) <comparison> } CLPARENT
+<comparison> ::= <value> (EQU | SMALL | SMALLQUI | NOTEQUI) <value>
+<assignment_expression>::= <variable> ASSIGN <expression>
+<expression>::= <function_call> | <addop> { (ADD | SUB) <addop> }
+<addop>::= <value> {( MUL | DIV ) <value>}
+<array_declaration>::= ARRAY ID <size> <size> ENDL
+<size> ::= OPBRACK NUM CLBRACKET
+<array_idxing_expr> ::= <placing> <placing>
+<placing> ::= OPBRACK (ID | NUM) CLBRACKET
+<loop>::= LOOP <condition> OPCURL {<statement>} CLCURL
+<if_statement>::= IF <condition> OPCURL {<statement>} CLCURL [<else_statement>]
+<else_statement>::= ELSE OPCURL {<statement>} CLCURL
+'''
 class WumpusWorldParser:
     def __init__(self, file_name):
         self.tokens = []
@@ -34,6 +59,23 @@ class WumpusWorldParser:
 
         return Node("function_def_parameters", children=parameters)
     
+    def world_declaration(self):
+        try:
+            children = []
+            if not self.match_token("WORLD"):
+                raise SyntaxError("Expected WORLD")
+            self.current_token += 1
+            children.append(Node("WORLD"))
+            children.append(self.size())
+            children.append(self.size())
+            if not self.match_token("ENDL"):
+                raise SyntaxError("Expected ENDL")
+            self.current_token += 1
+        except SyntaxError as e:
+            print("Syntax error at line {}: {}".format(self.tokens[self.current_token][2], e))
+            sys.exit(1)
+        return Node("world_declaration", children=children)
+    
     def array_declaration(self):
         try:
             children = []
@@ -41,6 +83,7 @@ class WumpusWorldParser:
                 raise SyntaxError("Expected ARRAY")
             self.current_token += 1
             children.append(Node("ARRAY"))
+            
             if not self.match_token("ID"):
                 raise SyntaxError("Expected an identifier")
             children.append(Node("ID", val=self.tokens[self.current_token][1], line=int(self.tokens[self.current_token][2])))
@@ -123,16 +166,22 @@ class WumpusWorldParser:
         return Node("statement", children=[stmt])
     
     def function_call(self):
-        self.match_token("CALL")
+        if not self.match_token("CALL"):
+            raise SyntaxError("Expected CALL")
         self.current_token += 1
+        if not self.match_token("ID"):
+            raise SyntaxError("Expected an identifier")
         function_name = Node("ID", val=self.tokens[self.current_token][1], line=int(self.tokens[self.current_token][2]))
         self.current_token += 1
+        if not self.match_token("OPPARENT"):
+            raise SyntaxError("Expected OPPARENT")
         self.match_token("OPPARENT")
         self.current_token += 1
         arguments = []
         if not self.match_token("CLPARENT"):
             arguments.append(self.arguments())
-            #arguments = self.arguments()
+        if not self.match_token("CLPARENT"):
+            raise SyntaxError("Expected CLPARENT")
         self.match_token("CLPARENT")
         self.current_token += 1
         return Node("function_call", children=[function_name] + arguments)
@@ -143,6 +192,8 @@ class WumpusWorldParser:
         try:
             children.append(self.variable())
             if not self.match_token("ASSIGN"):
+                print(self.tokens[self.current_token:])
+                print(self.tokens[self.current_token])
                 raise SyntaxError("Expected ASSIGN")
             self.current_token += 1
             children.append(Node("ASSIGN"))
@@ -279,58 +330,13 @@ class WumpusWorldParser:
         return Node("addop", children=children)
     
     def value(self):
-        # NUM | ID [<array_idxing_expr>] | WU | AG | PT | GO | BR | GL | ST | EM | SC | BU | EA | WE | SO | NO
+        # NUM | <variable> | TRUE | FALSE
         try:
             if self.match_token("NUM"):
                 value = Node("NUM", val=int(self.tokens[self.current_token][1]))
                 self.current_token += 1
             elif self.match_token("ID"):
-                value = Node("ID", val=self.tokens[self.current_token][1], line=int(self.tokens[self.current_token][2]))
-                self.current_token += 1
-                if self.match_token("OPBRACKET"):
-                    value = [value,self.array_idxing_expr()]
-            elif self.match_token("WU"):
-                value = Node("WU")
-                self.current_token += 1
-            elif self.match_token("AG"):
-                value = Node("AG")
-                self.current_token += 1
-            elif self.match_token("PT"):
-                value = Node("PT")
-                self.current_token += 1
-            elif self.match_token("GO"):
-                value = Node("GO")
-                self.current_token += 1
-            elif self.match_token("BR"):
-                value = Node("BR")
-                self.current_token += 1
-            elif self.match_token("GL"):
-                value = Node("GL")
-                self.current_token += 1
-            elif self.match_token("ST"):
-                value = Node("ST")
-                self.current_token += 1
-            elif self.match_token("EM"):
-                value = Node("EM")
-                self.current_token += 1
-            elif self.match_token("SC"):
-                value = Node("SC")
-                self.current_token += 1
-            elif self.match_token("BU"):
-                value = Node("BU")
-                self.current_token += 1
-            elif self.match_token("EA"):
-                value = Node("EA")
-                self.current_token += 1
-            elif self.match_token("WE"):
-                value = Node("WE")
-                self.current_token += 1
-            elif self.match_token("SO"):
-                value = Node("SO")
-                self.current_token += 1
-            elif self.match_token("NO"):
-                value = Node("NO")
-                self.current_token += 1
+                value = self.variable()
             elif self.match_token("TRUE"):
                 value = Node("TRUE")
                 self.current_token += 1
@@ -342,8 +348,6 @@ class WumpusWorldParser:
         except SyntaxError as e:
             print(e)
             sys.exit(1)
-        if isinstance(value, list):
-            return Node("value", children=value)
         return Node("value", children=[value])
     
     def condition(self):
@@ -425,18 +429,13 @@ class WumpusWorldParser:
         return Node("variable", children=[var])
     
     def main_body(self):
-        # <main_body>::= BEGIN <array_declaration> {<array_declaration>} {<statement>} END
+        # <main_body>::= BEGIN <world_declaration> {<array_declaration>} {<statement>} END
         children = []
         try:
             if not self.match_token("BEGIN"):
                 raise SyntaxError("Expected BEGIN token")
             self.current_token += 1
             children.append(Node("BEGIN"))
-            if not self.match_token("ARRAY"):
-                raise SyntaxError("Expected a first array for the world")
-            children.append(self.array_declaration())
-            while self.match_token("ARRAY"):
-                children.append(self.array_declaration())
             while self.match_token("CALL") or self.match_token("LOOP") or self.match_token("IF") or self.match_token("ID") or self.match_token("RETURN"):
                 children.append(self.statement())
             print(children)
@@ -493,14 +492,17 @@ class WumpusWorldParser:
     
     def language(self):
         functions = []
+        children = []
         try:
+            children.append(self.world_declaration())
+            while self.match_token("ARRAY"):
+                children.append(self.array_declaration())
             while self.match_token("DEFINE"):
-                
-                functions.append(self.function())
+                children.append(self.function())
                 self.current_token += 1
             print()    
-            main_body = self.main_body()
-            node = Node("language", children=functions + [main_body])
+            children.append(self.main_body())
+            node = Node("language", children=children)
             if self.current_token != len(self.tokens):
                 print("Error: unexpected token at line %d" % int(self.tokens[self.current_token][2]))
                 sys.exit(1)

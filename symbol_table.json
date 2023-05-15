@@ -1,0 +1,66 @@
+{
+  "global": {
+    "world": {
+      "type": "array",
+      "rows": 5,
+      "cols": 5
+    },
+    "5": {
+      "memory_index": 16
+    },
+    "a": {
+      "type": "array",
+      "rows": 1,
+      "cols": 1
+    },
+    "1": {
+      "memory_index": 27
+    },
+    "test1": {
+      "type": "function",
+      "params": [
+        "i",
+        "x"
+      ]
+    },
+    "0": {
+      "memory_index": 22
+    },
+    "test2": {
+      "type": "function",
+      "params": [
+        "y"
+      ]
+    },
+    "2": {
+      "memory_index": 18
+    },
+    "10": {
+      "memory_index": 24
+    },
+    "8": {
+      "memory_index": 23
+    }
+  },
+  "main": {
+    "n": {
+      "type": "variable",
+      "declaration": 12
+    },
+    "idx": {
+      "type": "variable",
+      "declaration": 13
+    },
+    "sum": {
+      "type": "variable",
+      "declaration": 14
+    }
+  },
+  "test1": {
+    "z": {
+      "type": "variable",
+      "declaration": 4
+    }
+  },
+  "test2": {}
+}

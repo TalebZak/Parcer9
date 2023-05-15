@@ -3,36 +3,19 @@ from anytree import Node, RenderTree
 from anytree.importer import JsonImporter, DictImporter
 from anytree.exporter import JsonExporter, DotExporter
 import sys
-        
-def rebuild_tree(node):
-    children = node.get('children', [])
-    # build symbol table 
-
-
-    # Remove non-terminal nodes with only one child
-    while len(children) == 1 and (not node.get('val') or not node.get('line')):
-        node = children[0]
-        children = node.get('children', [])
-
-    # Recursively rebuild subtrees
-    new_children = [rebuild_tree(child) for child in children]
-
-    # Update the current node's children
-    node['children'] = new_children
-
-    return node
-
+global const_line
+const_line = 0
 def cst_to_ast(cst_node):
-
     if cst_node.name == "array_declaration":
-        ast_children = [cst_node.children[0], cst_to_ast(cst_node.children[2]), cst_to_ast(cst_node.children[3])]
-        return Node(cst_node.children[1].name, children=ast_children, line=cst_node.children[1].line, val=cst_node.children[1].val)
+        ast_children = [cst_node.children[1], cst_to_ast(cst_node.children[2]), cst_to_ast(cst_node.children[3])]
+        return Node("ARRAY", children=ast_children, line=cst_node.children[1].line, val=cst_node.children[1].val)
+    if cst_node.name == "world_declaration":
+        ast_children = [cst_to_ast(cst_node.children[1]), cst_to_ast(cst_node.children[2])]
+        return Node(cst_node.children[0].name, children=ast_children)
     if cst_node.name == "size":
         return cst_to_ast(cst_node.children[1])
     if cst_node.name == "variable":
-        if len(cst_node.children) == 1:
-            return Node(cst_node.children[0].name, line=cst_node.children[0].line, val=cst_node.children[0].val)
-        ast_children = cst_to_ast(cst_node.children[1])
+        ast_children = cst_to_ast(cst_node.children[1]) if len(cst_node.children) > 1 else []        
         return Node(cst_node.children[0].name, children=ast_children, line=cst_node.children[0].line, val=cst_node.children[0].val)
     if cst_node.name == "array_idxing_expr":
         return [cst_to_ast(node) for node in cst_node.children]
@@ -41,12 +24,12 @@ def cst_to_ast(cst_node):
             return Node(cst_node.children[1].name, line=cst_node.children[1].line, val=cst_node.children[1].val)
         return Node(cst_node.children[1].name, val=cst_node.children[1].val)
     if cst_node.name == "value":
-        if cst_node.children[0].name != "ID":
-            if cst_node.children[0].name == "NUM":
-                return Node(cst_node.children[0].name, val=cst_node.children[0].val)
-            return Node(cst_node.children[0].name)
-        ast_children = cst_to_ast(cst_node.children[1]) if len(cst_node.children) > 1 else []
-        return Node(cst_node.children[0].name, children=ast_children, line=cst_node.children[0].line, val=cst_node.children[0].val)
+        if cst_node.children[0].name == "variable":
+            return cst_to_ast(cst_node.children[0])
+        if cst_node.children[0].name == "NUM":
+            return Node(cst_node.children[0].name, val=cst_node.children[0].val)
+        return Node(cst_node.children[0].name)
+        
     if cst_node.name == "addop":
         if len(cst_node.children) == 1:
             return cst_to_ast(cst_node.children[0])
@@ -132,13 +115,9 @@ def cst_to_ast(cst_node):
         children = []
         is_array = False
         for child in cst_node.children:
-            
-            if child.name == "ARRAY":
-                is_array = True
-                continue
             if child.name == "SEMI":
                 continue
-            child_ast = child if not is_array else Node(child.name, children=[Node("ARRAY")], val = child.val, line = child.line)
+            child_ast = child
             is_array = False
             children.append(child_ast)
         #children = [cst_to_ast(node) for node in cst_node.children if node.name != "SEMI"]
@@ -148,7 +127,7 @@ def cst_to_ast(cst_node):
         body = list(cst_node.children[6:len(cst_node.children)-1])
         for i in range(len(body)):
             body[i] = cst_to_ast(body[i])
-        return Node("DEFINE", children=[cst_node.children[1], params] + body)
+        return Node("FUNCTION", children=[cst_node.children[1], params] + body)
     if(cst_node.name == "language"):
         children = [cst_to_ast(node) for node in cst_node.children]
         #if the child is begin replace it with its children
@@ -159,29 +138,135 @@ def cst_to_ast(cst_node):
     if cst_node.name == "function_call":
         children = [cst_to_ast(node) for node in cst_node.children]
         return Node("CALL", children=children)
-    if cst_node.name == "function_call_parameters":
-        children = [cst_to_ast(node) for node in cst_node.children]
+    if cst_node.name == "arguments":
+        children = [cst_to_ast(node) for node in cst_node.children if node.name != "SEMI"]
         return Node("ARGS", children=children)
+    if cst_node.name == "ID":
+        return Node("ID", val=cst_node.val, line=cst_node.line)
+    if cst_node.name == "NUM":
+        return Node("NUM", val=cst_node.val)
     children = [cst_to_ast(node) for node in cst_node.children] if cst_node.children else []
     return Node(cst_node.name, children=children)
 
-def check_semantics(ast_node, symbol_table):
-    if ast_node.name == "DEFINE":
-        if ast_node.children[0].val in symbol_table:
-            raise Exception("Function already defined")
+def check_semantics(ast_node, symbol_table, scope="global"):
+    # get the const_line global variable
+    global const_line
+    if ast_node is None:
+        return
+
+    if scope not in symbol_table:
+        symbol_table[scope] = {}
+
+    if ast_node.name == "NUM":
+        symbol_table["global"][ast_node.val] = {
+            "memory_index" : const_line
+        }
+        const_line += 1
+
+    if ast_node.name == "FUNCTION":
         func_name = ast_node.children[0].val
-        symbol_table[func_name] = {}
-        symbol_table[func_name]["params"] = []
+        if func_name in symbol_table["global"]:
+            raise Exception("Function already defined")
+
+        symbol_table["global"][func_name] = {
+            "type": "function",
+            "params": [],
+        }
+
         if ast_node.children[1]:
             for param in ast_node.children[1].children:
-                type = "array" if param.children else "not_array"
-                symbol_table[func_name]["params"].append((param.val, type))
-        return
+                val = param.val
+                if val in symbol_table["global"]:
+                    raise Exception("Parameter conflicts with global name(function or array)")
+                symbol_table["global"][func_name]["params"].append(param.val)
+
+        for child in ast_node.children[2:]:
+            check_semantics(child, symbol_table, func_name)
+
+    if ast_node.name == "ARRAY" or ast_node.name == "WORLD":
+        array_name = ast_node.children[0].val if ast_node.name == "ARRAY" else "world"
+        if array_name in symbol_table["global"]:
+            raise Exception("Array name conflicts with a function ")
+        rows = ast_node.children[1].val if ast_node.name == "ARRAY" else ast_node.children[0].val
+        cols = ast_node.children[2].val if ast_node.name == "ARRAY" else ast_node.children[1].val
+        symbol_table["global"][array_name] = {
+                "type": "array",
+                "rows": rows,
+                "cols": cols,
+        }
+        if rows <= 0 or cols <= 0:
+            raise Exception(f"Array {ast_node.children[0].val} size must have at least one row and one column")
+
+
+    if ast_node.name == "ASSIGN":
+        left_hand_side = ast_node.children[0]
+
+        if left_hand_side.val in symbol_table["global"]:
+            if symbol_table["global"][left_hand_side.val]["type"] == "function":
+                raise Exception("Cannot assign to a function")
+            if symbol_table["global"][left_hand_side.val]["type"] == "array":
+                if len(left_hand_side.children) == 0:
+                    raise Exception("Array used without indexing")
+        # if the variable is not defined in the current scope or in the global scope and it is not a parameter of the current function(if the scope is not local or global)
+        elif left_hand_side.val not in symbol_table.get(scope, {}) and (scope not in ["global"] and left_hand_side.val not in symbol_table.get("global", {}).get(scope, {}).get("params", [])):
+            if scope not in symbol_table:
+                symbol_table[scope] = {}
+            symbol_table[scope][left_hand_side.val] = {
+                "type": "variable",
+                "declaration": ast_node.children[0].line,
+            }
+
+        right_hand_side = ast_node.children[1]
+        queue = [right_hand_side]
+        while queue:
+            node = queue.pop(0)
+            if node.name == "ID":
+                # if the variable is not defined in the current scope or in the global scope and it is not a parameter of the current function(if the scope is not local or global)
+                if node.val not in symbol_table[scope] and (scope not in ["global", "main"] and node.val not in symbol_table["global"][scope]["params"]):
+                    raise Exception(f"Variable {node.val} not defined")
+                if node.val in symbol_table["global"] and symbol_table["global"][node.val]["type"] == "array":
+                    if len(node.children) == 0:
+                        raise Exception(f"Array {node.val} used without indexing")
+            if node.name == "CALL":
+                if node.children[0].val not in symbol_table["global"]:
+                    raise Exception(f"Function {node.children[0].val} not defined")
+                if symbol_table["global"][node.children[0].val]["type"] != "function":
+                    raise Exception(f"{node.children[0].val} is not a function")
+                args_node = node.children[1]
+                if len(args_node.children) != len(symbol_table["global"][node.children[0].val]["params"]):
+                    raise Exception(f"Wrong number of arguments for function {node.children[0].val}")
+
+            queue.extend(node.children)
     
+    if ast_node.name == "RETURN":
+        if len(ast_node.children) == 0:
+            return
+        node = ast_node.children[0]
+
+        if node.name == "ID":
+
+            # check if its anything in global, because u can't return an array or a function
+            if node.val in symbol_table["global"]:
+                if symbol_table["global"][node.val]["type"] == "array" and len(node.children) == 0:
+                    raise Exception("Cannot return an array without indexing")
+                if symbol_table["global"][node.val]["type"] == "function":
+                    raise Exception("Cannot return a function")
+            # valid return if the variable is defined in the current scope or is a parameter of the current function(if the scope is not local or global)
+            elif node.val not in symbol_table[scope] and (scope not in ["global", "main"] and node.val not in symbol_table["global"][scope]["params"]):
+                raise Exception(f"Variable {node.val} not defined")
+    
+    if ast_node.name == "NUM":
+        if ast_node.val > 9999999999:
+            raise Exception("Number out of range")
+
+    if ast_node.name == "BODY":
+        scope = 'main'
+
     for child in ast_node.children:
-        check_semantics(child, symbol_table)
+        check_semantics(child, symbol_table, scope=scope)
 
 def main():
+    
     with open('parse_tree.json', 'r') as f:
         tree = json.load(f)
     importer = DictImporter()
@@ -195,10 +280,20 @@ def main():
     with open("ast.json", "w") as f:
         exporter = JsonExporter(indent=2)
         f.write(exporter.export(tree))
-    symbol_table = {}
+    symbol_table = {
+        'global': {
+        },
+        'main': {
+        }
+    }
     check_semantics(tree, symbol_table)
-    print(symbol_table)
-
+    '''format printing of symbol table'''
+    for key in symbol_table:
+        print(key, symbol_table[key])
+    print("No semantic errors found")
+    # store the symbol table in a json file
+    with open("symbol_table.json", "w") as f:
+        json.dump(symbol_table, f, indent=2)
 
 if __name__ == '__main__':
     main()

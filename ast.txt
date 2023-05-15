@@ -1,9 +1,15 @@
 PROGRAM
-├── DEFINE
+├── WORLD
+│   ├── NUM
+│   └── NUM
+├── ARRAY
+│   ├── ID
+│   ├── NUM
+│   └── NUM
+├── FUNCTION
 │   ├── ID
 │   ├── PARAMS
 │   │   ├── ID
-│   │   │   └── ARRAY
 │   │   └── ID
 │   ├── ASSIGN
 │   │   ├── ID
@@ -12,7 +18,9 @@ PROGRAM
 │   │       └── NUM
 │   └── RETURN
 │       └── ID
-├── DEFINE
+│           ├── NUM
+│           └── NUM
+├── FUNCTION
 │   ├── ID
 │   ├── PARAMS
 │   │   └── ID
@@ -24,10 +32,6 @@ PROGRAM
 │   └── RETURN
 │       └── ID
 └── BODY
-    ├── ID
-    │   ├── ARRAY
-    │   ├── NUM
-    │   └── NUM
     ├── ASSIGN
     │   ├── ID
     │   └── NUM
@@ -36,7 +40,16 @@ PROGRAM
     │   └── NUM
     ├── ASSIGN
     │   ├── ID
+    │   └── ID
+    ├── ASSIGN
+    │   ├── ID
+    │   │   ├── NUM
+    │   │   └── NUM
     │   └── NUM
+    ├── RETURN
+    │   └── ID
+    │       ├── NUM
+    │       └── NUM
     ├── LOOP
     │   ├── AND
     │   │   ├── SMALL
@@ -47,20 +60,26 @@ PROGRAM
     │   │       └── NUM
     │   ├── ASSIGN
     │   │   ├── ID
+    │   │   └── CALL
+    │   │       ├── ID
+    │   │       └── ARGS
+    │   │           └── ID
+    │   ├── ASSIGN
+    │   │   ├── ID
     │   │   └── ADD
     │   │       ├── ID
-    │   │       └── NUM
+    │   │       │   ├── NUM
+    │   │       │   └── NUM
+    │   │       └── MUL
+    │   │           ├── ID
+    │   │           └── MUL
+    │   │               ├── ID
+    │   │               └── ID
     │   └── ASSIGN
     │       ├── ID
-    │       └── ADD
-    │           ├── ID
-    │           │   ├── NUM
-    │           │   └── NUM
-    │           └── MUL
-    │               ├── ID
-    │               └── MUL
-    │                   ├── ID
-    │                   └── ID
+    │       │   ├── ID
+    │       │   └── NUM
+    │       └── NUM
     └── IF
         ├── SMALL
         │   ├── ID

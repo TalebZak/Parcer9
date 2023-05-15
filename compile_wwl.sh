@@ -27,12 +27,19 @@ if [ $? -ne 0 ]; then
     exit 3
 fi
 
-# Run the wwl_parser.py script
+# Run the semantics.py script
 python semantics.py
 
-# Check if the wwl_parser.py script executed successfully
+# Check if the semantics.py script executed successfully
 if [ $? -ne 0 ]; then
     echo "Error: semantics failed."
+    exit 3
+fi
+echo "Semantics passed."
+python codegen.py
+# Check if the codegen.py script executed successfully
+if [ $? -ne 0 ]; then
+    echo "Error: codegen failed."
     exit 3
 fi
 
