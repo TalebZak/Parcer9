@@ -5,11 +5,11 @@
       "name": "WORLD",
       "children": [
         {
-          "val": 5,
+          "val": 4,
           "name": "NUM"
         },
         {
-          "val": 5,
+          "val": 4,
           "name": "NUM"
         }
       ]
@@ -25,135 +25,12 @@
           "name": "ID"
         },
         {
-          "val": 1,
+          "val": 5,
           "name": "NUM"
         },
         {
-          "val": 1,
+          "val": 5,
           "name": "NUM"
-        }
-      ]
-    },
-    {
-      "name": "FUNCTION",
-      "children": [
-        {
-          "val": "test1",
-          "line": 3,
-          "name": "ID"
-        },
-        {
-          "name": "PARAMS",
-          "children": [
-            {
-              "val": "i",
-              "line": 3,
-              "name": "ID"
-            },
-            {
-              "val": "x",
-              "line": 3,
-              "name": "ID"
-            }
-          ]
-        },
-        {
-          "name": "ASSIGN",
-          "children": [
-            {
-              "line": 4,
-              "val": "z",
-              "name": "ID"
-            },
-            {
-              "name": "ADD",
-              "children": [
-                {
-                  "line": 4,
-                  "val": "x",
-                  "name": "ID"
-                },
-                {
-                  "val": 1,
-                  "name": "NUM"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "RETURN",
-          "children": [
-            {
-              "line": 5,
-              "val": "a",
-              "name": "ID",
-              "children": [
-                {
-                  "val": 1,
-                  "name": "NUM"
-                },
-                {
-                  "val": 0,
-                  "name": "NUM"
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    },
-    {
-      "name": "FUNCTION",
-      "children": [
-        {
-          "val": "test2",
-          "line": 7,
-          "name": "ID"
-        },
-        {
-          "name": "PARAMS",
-          "children": [
-            {
-              "val": "y",
-              "line": 7,
-              "name": "ID"
-            }
-          ]
-        },
-        {
-          "name": "ASSIGN",
-          "children": [
-            {
-              "line": 8,
-              "val": "y",
-              "name": "ID"
-            },
-            {
-              "name": "ADD",
-              "children": [
-                {
-                  "line": 8,
-                  "val": "y",
-                  "name": "ID"
-                },
-                {
-                  "val": 1,
-                  "name": "NUM"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "RETURN",
-          "children": [
-            {
-              "line": 9,
-              "val": "y",
-              "name": "ID"
-            }
-          ]
         }
       ]
     },
@@ -164,7 +41,7 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 12,
+              "line": 4,
               "val": "n",
               "name": "ID"
             },
@@ -178,7 +55,7 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 13,
+              "line": 5,
               "val": "idx",
               "name": "ID"
             },
@@ -192,58 +69,13 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 14,
+              "line": 6,
               "val": "sum",
               "name": "ID"
             },
             {
-              "line": 14,
-              "val": "idx",
-              "name": "ID"
-            }
-          ]
-        },
-        {
-          "name": "ASSIGN",
-          "children": [
-            {
-              "line": 15,
-              "val": "a",
-              "name": "ID",
-              "children": [
-                {
-                  "val": 1,
-                  "name": "NUM"
-                },
-                {
-                  "val": 2,
-                  "name": "NUM"
-                }
-              ]
-            },
-            {
-              "val": 5,
+              "val": 0,
               "name": "NUM"
-            }
-          ]
-        },
-        {
-          "name": "RETURN",
-          "children": [
-            {
-              "line": 16,
-              "val": "a",
-              "name": "ID",
-              "children": [
-                {
-                  "val": 1,
-                  "name": "NUM"
-                },
-                {
-                  "val": 2,
-                  "name": "NUM"
-                }
-              ]
             }
           ]
         },
@@ -251,66 +83,17 @@
           "name": "LOOP",
           "children": [
             {
-              "name": "AND",
+              "name": "SMALL",
               "children": [
                 {
-                  "name": "SMALL",
-                  "children": [
-                    {
-                      "line": 18,
-                      "val": "idx",
-                      "name": "ID"
-                    },
-                    {
-                      "line": 18,
-                      "val": "n",
-                      "name": "ID"
-                    }
-                  ]
-                },
-                {
-                  "name": "SMALL",
-                  "children": [
-                    {
-                      "line": 18,
-                      "val": "sum",
-                      "name": "ID"
-                    },
-                    {
-                      "val": 10,
-                      "name": "NUM"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "name": "ASSIGN",
-              "children": [
-                {
-                  "line": 19,
+                  "line": 7,
                   "val": "idx",
                   "name": "ID"
                 },
                 {
-                  "name": "CALL",
-                  "children": [
-                    {
-                      "val": "test2",
-                      "line": 19,
-                      "name": "ID"
-                    },
-                    {
-                      "name": "ARGS",
-                      "children": [
-                        {
-                          "line": 19,
-                          "val": "sum",
-                          "name": "ID"
-                        }
-                      ]
-                    }
-                  ]
+                  "line": 7,
+                  "val": "n",
+                  "name": "ID"
                 }
               ]
             },
@@ -318,48 +101,36 @@
               "name": "ASSIGN",
               "children": [
                 {
-                  "line": 20,
-                  "val": "sum",
+                  "line": 8,
+                  "val": "idx",
                   "name": "ID"
                 },
                 {
                   "name": "ADD",
                   "children": [
                     {
-                      "line": 20,
-                      "val": "a",
-                      "name": "ID",
-                      "children": [
-                        {
-                          "val": 0,
-                          "name": "NUM"
-                        },
-                        {
-                          "val": 1,
-                          "name": "NUM"
-                        }
-                      ]
+                      "val": 1,
+                      "name": "NUM"
                     },
                     {
-                      "name": "MUL",
+                      "name": "ADD",
                       "children": [
                         {
-                          "line": 20,
+                          "line": 8,
                           "val": "idx",
                           "name": "ID"
                         },
                         {
-                          "name": "MUL",
+                          "name": "ADD",
                           "children": [
                             {
-                              "line": 20,
-                              "val": "sum",
+                              "line": 8,
+                              "val": "idx",
                               "name": "ID"
                             },
                             {
-                              "line": 20,
-                              "val": "sum",
-                              "name": "ID"
+                              "val": 1,
+                              "name": "NUM"
                             }
                           ]
                         }
@@ -373,51 +144,7 @@
               "name": "ASSIGN",
               "children": [
                 {
-                  "line": 21,
-                  "val": "a",
-                  "name": "ID",
-                  "children": [
-                    {
-                      "line": 21,
-                      "val": "num",
-                      "name": "ID"
-                    },
-                    {
-                      "val": 0,
-                      "name": "NUM"
-                    }
-                  ]
-                },
-                {
-                  "val": 8,
-                  "name": "NUM"
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "IF",
-          "children": [
-            {
-              "name": "SMALL",
-              "children": [
-                {
-                  "line": 24,
-                  "val": "sum",
-                  "name": "ID"
-                },
-                {
-                  "val": 10,
-                  "name": "NUM"
-                }
-              ]
-            },
-            {
-              "name": "ASSIGN",
-              "children": [
-                {
-                  "line": 25,
+                  "line": 9,
                   "val": "sum",
                   "name": "ID"
                 },
@@ -425,66 +152,14 @@
                   "name": "ADD",
                   "children": [
                     {
-                      "line": 25,
+                      "line": 9,
                       "val": "sum",
                       "name": "ID"
                     },
                     {
-                      "val": 1,
-                      "name": "NUM"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "name": "ELSE",
-              "children": [
-                {
-                  "name": "ASSIGN",
-                  "children": [
-                    {
-                      "line": 27,
-                      "val": "sum",
+                      "line": 9,
+                      "val": "idx",
                       "name": "ID"
-                    },
-                    {
-                      "name": "SUB",
-                      "children": [
-                        {
-                          "line": 27,
-                          "val": "sum",
-                          "name": "ID"
-                        },
-                        {
-                          "val": 1,
-                          "name": "NUM"
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "ASSIGN",
-                  "children": [
-                    {
-                      "line": 28,
-                      "val": "sum",
-                      "name": "ID"
-                    },
-                    {
-                      "name": "ADD",
-                      "children": [
-                        {
-                          "line": 28,
-                          "val": "sum",
-                          "name": "ID"
-                        },
-                        {
-                          "val": 1,
-                          "name": "NUM"
-                        }
-                      ]
                     }
                   ]
                 }

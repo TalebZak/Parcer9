@@ -157,11 +157,13 @@ def check_semantics(ast_node, symbol_table, scope="global"):
     if scope not in symbol_table:
         symbol_table[scope] = {}
 
-    if ast_node.name == "NUM":
-        symbol_table["global"][ast_node.val] = {
-            "memory_index" : const_line
-        }
-        const_line += 1
+    if ast_node.name == "NUM" and ast_node.val not in symbol_table["global"]:
+            symbol_table["global"][ast_node.val] = {
+                "type": "int",
+                "memory_index": const_line
+            }
+            const_line += 1
+        
 
     if ast_node.name == "FUNCTION":
         func_name = ast_node.children[0].val

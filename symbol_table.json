@@ -2,65 +2,43 @@
   "global": {
     "world": {
       "type": "array",
+      "rows": 4,
+      "cols": 4
+    },
+    "4": {
+      "type": "int",
+      "memory_index": 0
+    },
+    "a": {
+      "type": "array",
       "rows": 5,
       "cols": 5
     },
     "5": {
-      "memory_index": 16
-    },
-    "a": {
-      "type": "array",
-      "rows": 1,
-      "cols": 1
-    },
-    "1": {
-      "memory_index": 27
-    },
-    "test1": {
-      "type": "function",
-      "params": [
-        "i",
-        "x"
-      ]
+      "type": "int",
+      "memory_index": 1
     },
     "0": {
-      "memory_index": 22
+      "type": "int",
+      "memory_index": 2
     },
-    "test2": {
-      "type": "function",
-      "params": [
-        "y"
-      ]
-    },
-    "2": {
-      "memory_index": 18
-    },
-    "10": {
-      "memory_index": 24
-    },
-    "8": {
-      "memory_index": 23
+    "1": {
+      "type": "int",
+      "memory_index": 3
     }
   },
   "main": {
     "n": {
       "type": "variable",
-      "declaration": 12
+      "declaration": 4
     },
     "idx": {
       "type": "variable",
-      "declaration": 13
+      "declaration": 5
     },
     "sum": {
       "type": "variable",
-      "declaration": 14
+      "declaration": 6
     }
-  },
-  "test1": {
-    "z": {
-      "type": "variable",
-      "declaration": 4
-    }
-  },
-  "test2": {}
+  }
 }

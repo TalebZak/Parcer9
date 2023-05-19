@@ -6,31 +6,6 @@ PROGRAM
 │   ├── ID
 │   ├── NUM
 │   └── NUM
-├── FUNCTION
-│   ├── ID
-│   ├── PARAMS
-│   │   ├── ID
-│   │   └── ID
-│   ├── ASSIGN
-│   │   ├── ID
-│   │   └── ADD
-│   │       ├── ID
-│   │       └── NUM
-│   └── RETURN
-│       └── ID
-│           ├── NUM
-│           └── NUM
-├── FUNCTION
-│   ├── ID
-│   ├── PARAMS
-│   │   └── ID
-│   ├── ASSIGN
-│   │   ├── ID
-│   │   └── ADD
-│   │       ├── ID
-│   │       └── NUM
-│   └── RETURN
-│       └── ID
 └── BODY
     ├── ASSIGN
     │   ├── ID
@@ -40,63 +15,22 @@ PROGRAM
     │   └── NUM
     ├── ASSIGN
     │   ├── ID
-    │   └── ID
-    ├── ASSIGN
-    │   ├── ID
-    │   │   ├── NUM
-    │   │   └── NUM
     │   └── NUM
-    ├── RETURN
-    │   └── ID
-    │       ├── NUM
-    │       └── NUM
-    ├── LOOP
-    │   ├── AND
-    │   │   ├── SMALL
-    │   │   │   ├── ID
-    │   │   │   └── ID
-    │   │   └── SMALL
-    │   │       ├── ID
-    │   │       └── NUM
-    │   ├── ASSIGN
-    │   │   ├── ID
-    │   │   └── CALL
-    │   │       ├── ID
-    │   │       └── ARGS
-    │   │           └── ID
-    │   ├── ASSIGN
-    │   │   ├── ID
-    │   │   └── ADD
-    │   │       ├── ID
-    │   │       │   ├── NUM
-    │   │       │   └── NUM
-    │   │       └── MUL
-    │   │           ├── ID
-    │   │           └── MUL
-    │   │               ├── ID
-    │   │               └── ID
-    │   └── ASSIGN
-    │       ├── ID
-    │       │   ├── ID
-    │       │   └── NUM
-    │       └── NUM
-    └── IF
+    └── LOOP
         ├── SMALL
         │   ├── ID
-        │   └── NUM
+        │   └── ID
         ├── ASSIGN
         │   ├── ID
         │   └── ADD
-        │       ├── ID
-        │       └── NUM
-        └── ELSE
-            ├── ASSIGN
-            │   ├── ID
-            │   └── SUB
-            │       ├── ID
-            │       └── NUM
-            └── ASSIGN
+        │       ├── NUM
+        │       └── ADD
+        │           ├── ID
+        │           └── ADD
+        │               ├── ID
+        │               └── NUM
+        └── ASSIGN
+            ├── ID
+            └── ADD
                 ├── ID
-                └── ADD
-                    ├── ID
-                    └── NUM
+                └── ID
