@@ -5,31 +5,11 @@
       "name": "WORLD",
       "children": [
         {
-          "val": 4,
+          "val": 1,
           "name": "NUM"
         },
         {
-          "val": 4,
-          "name": "NUM"
-        }
-      ]
-    },
-    {
-      "line": 2,
-      "val": "a",
-      "name": "ARRAY",
-      "children": [
-        {
-          "val": "a",
-          "line": 2,
-          "name": "ID"
-        },
-        {
-          "val": 5,
-          "name": "NUM"
-        },
-        {
-          "val": 5,
+          "val": 1,
           "name": "NUM"
         }
       ]
@@ -41,7 +21,7 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 4,
+              "line": 3,
               "val": "n",
               "name": "ID"
             },
@@ -55,12 +35,12 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 5,
+              "line": 4,
               "val": "idx",
               "name": "ID"
             },
             {
-              "val": 0,
+              "val": 8,
               "name": "NUM"
             }
           ]
@@ -69,50 +49,7 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 7,
-              "val": "idx",
-              "name": "ID"
-            },
-            {
-              "name": "ADD",
-              "children": [
-                {
-                  "val": 1,
-                  "name": "NUM"
-                },
-                {
-                  "name": "SUB",
-                  "children": [
-                    {
-                      "name": "MUL",
-                      "children": [
-                        {
-                          "line": 7,
-                          "val": "idx",
-                          "name": "ID"
-                        },
-                        {
-                          "line": 7,
-                          "val": "idx",
-                          "name": "ID"
-                        }
-                      ]
-                    },
-                    {
-                      "val": 1,
-                      "name": "NUM"
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "ASSIGN",
-          "children": [
-            {
-              "line": 8,
+              "line": 5,
               "val": "sum",
               "name": "ID"
             },
@@ -120,12 +57,12 @@
               "name": "ADD",
               "children": [
                 {
-                  "line": 8,
+                  "line": 5,
                   "val": "sum",
                   "name": "ID"
                 },
                 {
-                  "line": 8,
+                  "line": 5,
                   "val": "idx",
                   "name": "ID"
                 }

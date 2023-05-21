@@ -12,42 +12,33 @@
     },
     "world": {
       "type": "array",
-      "rows": 4,
-      "cols": 4
-    },
-    "a": {
-      "type": "array",
-      "rows": 5,
-      "cols": 5
+      "rows": 1,
+      "cols": 1,
+      "memory_index": 5
     },
     "5": {
       "type": "constant",
-      "memory_index": 5,
+      "memory_index": 6,
       "value": 5
     },
-    "0": {
-      "type": "constant",
-      "memory_index": 6,
-      "value": 0
-    },
-    "1": {
+    "8": {
       "type": "constant",
       "memory_index": 7,
-      "value": 1
+      "value": 8
     }
   },
   "main": {
     "n": {
       "type": "variable",
-      "declaration": 4
+      "declaration": 3
     },
     "idx": {
       "type": "variable",
-      "declaration": 5
+      "declaration": 4
     },
     "sum": {
       "type": "variable",
-      "declaration": 8
+      "declaration": 5
     }
   }
 }

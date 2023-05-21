@@ -9,17 +9,6 @@ language
 │       ├── OPBRACKET
 │       ├── NUM
 │       └── CLBRACKET
-├── array_declaration
-│   ├── ARRAY
-│   ├── ID
-│   ├── size
-│   │   ├── OPBRACKET
-│   │   ├── NUM
-│   │   └── CLBRACKET
-│   └── size
-│       ├── OPBRACKET
-│       ├── NUM
-│       └── CLBRACKET
 └── main_body
     ├── BEGIN
     ├── statement
@@ -37,28 +26,6 @@ language
     │       │   └── ID
     │       ├── ASSIGN
     │       └── expression
-    │           └── addop
-    │               └── value
-    │                   └── NUM
-    ├── statement
-    │   └── assignment_expression
-    │       ├── variable
-    │       │   └── ID
-    │       ├── ASSIGN
-    │       └── expression
-    │           ├── addop
-    │           │   └── value
-    │           │       └── NUM
-    │           ├── ADD
-    │           ├── addop
-    │           │   ├── value
-    │           │   │   └── variable
-    │           │   │       └── ID
-    │           │   ├── MUL
-    │           │   └── value
-    │           │       └── variable
-    │           │           └── ID
-    │           ├── SUB
     │           └── addop
     │               └── value
     │                   └── NUM

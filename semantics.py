@@ -191,7 +191,9 @@ def check_semantics(ast_node, symbol_table, scope="global"):
                 "type": "array",
                 "rows": rows,
                 "cols": cols,
+                "memory_index": const_line
         }
+        const_line += int(rows) * int(cols)
         if rows <= 0 or cols <= 0:
             raise Exception(f"Array {ast_node.children[0].val} size must have at least one row and one column")
         return
