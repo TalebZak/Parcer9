@@ -40,6 +40,49 @@
       ]
     },
     {
+      "name": "array_declaration",
+      "children": [
+        {
+          "name": "ARRAY"
+        },
+        {
+          "val": "t",
+          "line": 2,
+          "name": "ID"
+        },
+        {
+          "name": "size",
+          "children": [
+            {
+              "name": "OPBRACKET"
+            },
+            {
+              "val": 1,
+              "name": "NUM"
+            },
+            {
+              "name": "CLBRACKET"
+            }
+          ]
+        },
+        {
+          "name": "size",
+          "children": [
+            {
+              "name": "OPBRACKET"
+            },
+            {
+              "val": 1,
+              "name": "NUM"
+            },
+            {
+              "name": "CLBRACKET"
+            }
+          ]
+        }
+      ]
+    },
+    {
       "name": "main_body",
       "children": [
         {
@@ -56,7 +99,7 @@
                   "children": [
                     {
                       "val": "n",
-                      "line": 3,
+                      "line": 4,
                       "name": "ID"
                     }
                   ]
@@ -98,7 +141,7 @@
                   "children": [
                     {
                       "val": "idx",
-                      "line": 4,
+                      "line": 5,
                       "name": "ID"
                     }
                   ]
@@ -116,7 +159,7 @@
                           "name": "value",
                           "children": [
                             {
-                              "val": 8,
+                              "val": 0,
                               "name": "NUM"
                             }
                           ]
@@ -139,8 +182,8 @@
                   "name": "variable",
                   "children": [
                     {
-                      "val": "sum",
-                      "line": 5,
+                      "val": "f",
+                      "line": 6,
                       "name": "ID"
                     }
                   ]
@@ -152,43 +195,45 @@
                   "name": "expression",
                   "children": [
                     {
-                      "name": "addop",
+                      "name": "function_call",
                       "children": [
                         {
-                          "name": "value",
-                          "children": [
-                            {
-                              "name": "variable",
-                              "children": [
-                                {
-                                  "val": "sum",
-                                  "line": 5,
-                                  "name": "ID"
-                                }
-                              ]
-                            }
-                          ]
+                          "val": "input",
+                          "line": 6,
+                          "name": "ID"
                         }
                       ]
-                    },
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "statement",
+          "children": [
+            {
+              "name": "function_call",
+              "children": [
+                {
+                  "val": "print",
+                  "line": 7,
+                  "name": "ID"
+                },
+                {
+                  "name": "arguments",
+                  "children": [
                     {
-                      "name": "ADD"
-                    },
-                    {
-                      "name": "addop",
+                      "name": "value",
                       "children": [
                         {
-                          "name": "value",
+                          "name": "variable",
                           "children": [
                             {
-                              "name": "variable",
-                              "children": [
-                                {
-                                  "val": "idx",
-                                  "line": 5,
-                                  "name": "ID"
-                                }
-                              ]
+                              "val": "f",
+                              "line": 7,
+                              "name": "ID"
                             }
                           ]
                         }

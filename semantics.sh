@@ -36,12 +36,3 @@ if [ $? -ne 0 ]; then
     exit 3
 fi
 echo "Semantics passed."
-python codegen.py
-# Check if the codegen.py script executed successfully
-if [ $? -ne 0 ]; then
-    echo "Error: codegen failed."
-    exit 3
-fi
-echo "Codegen passed."
-
-echo "Script execution completed successfully."

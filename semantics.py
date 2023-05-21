@@ -218,22 +218,15 @@ def check_semantics(ast_node, symbol_table, scope="global"):
             if symbol_table["global"][left_hand_side.val]["type"] == "array":
                 if len(left_hand_side.children) == 0:
                     raise Exception("Array used without indexing")
-        # if the variable is not defined in the current scope or in the global scope and it is not a parameter of the current function(if the scope is not local or global)
-        elif left_hand_side.val not in symbol_table.get(scope, {}) and (scope not in ["global"] and left_hand_side.val not in symbol_table.get("global", {}).get(scope, {}).get("params", [])):
-            if scope not in symbol_table:
-                symbol_table[scope] = {}
-            symbol_table[scope][left_hand_side.val] = {
-                "type": "variable",
-                "declaration": ast_node.children[0].line,
-            }
 
         right_hand_side = ast_node.children[1]
         queue = [right_hand_side]
         while queue:
             node = queue.pop(0)
+            
             if node.name == "ID":
                 # if the variable is not defined in the current scope or in the global scope and it is not a parameter of the current function(if the scope is not local or global)
-                if node.val not in symbol_table[scope] and (scope not in ["global", "main"] and node.val not in symbol_table["global"][scope]["params"]):
+                if node.val not in symbol_table[scope] and (scope == "main" or node.val not in symbol_table["global"][scope]["params"]):
                     raise Exception(f"Variable {node.val} not defined")
                 if node.val in symbol_table["global"] and symbol_table["global"][node.val]["type"] == "array":
                     if len(node.children) == 0:
@@ -243,13 +236,15 @@ def check_semantics(ast_node, symbol_table, scope="global"):
                     raise Exception(f"Function {node.children[0].val} not defined")
                 if symbol_table["global"][node.children[0].val]["type"] != "function":
                     raise Exception(f"{node.children[0].val} is not a function")
-                
-                args_node = node.children[1]
-                if len(args_node.children) != len(symbol_table["global"][node.children[0].val]["params"]):
-                    raise Exception(f"Wrong number of arguments for function {node.children[0].val}")
                 # if the does not have a return value, raise an exception
                 if not symbol_table["global"][node.children[0].val]["hasReturn"]:
                     raise Exception(f"Function {node.children[0].val} does not return a value")
+                # check if the number of arguments is correct
+                
+                if len(node.children) - 1 != len(symbol_table["global"][node.children[0].val]["params"]):
+                    raise Exception(f"function can't take no arguments")
+                continue
+        
             elif node.name == "NUM":
                 if node.val > 9999999999:
                     raise Exception("Number out of range")
@@ -260,8 +255,16 @@ def check_semantics(ast_node, symbol_table, scope="global"):
                         "value": node.val,
                     }
                     const_line += 1
-                return
             queue.extend(node.children)
+            # if the variable is not defined in the current scope or in the global scope and it is not a parameter of the current function(if the scope is not local or global)
+        if left_hand_side.val not in symbol_table.get(scope, {}) and (scope not in ["global"] and left_hand_side.val not in symbol_table.get("global", {}).get(scope, {}).get("params", [])):
+            if scope not in symbol_table:
+                symbol_table[scope] = {}
+            symbol_table[scope][left_hand_side.val] = {
+                "type": "variable",
+                "declaration": ast_node.children[0].line,
+            }
+            
         return
     
     if ast_node.name == "RETURN":
@@ -332,6 +335,29 @@ def main():
                 'memory_index': 4,
                 'value': 0
             },
+            'input': {
+                "type": "function",
+                'memory_index': 5,
+                'hasReturn': True,
+                'params': [],
+            },
+            'print': {
+                "type": "function",
+                'memory_index': 6,
+                'hasReturn': False,
+                'params': [
+                    'x'
+                ],
+            },
+            'place_wumpus': {
+                "type": "function",
+                'memory_index': 7,
+                'hasReturn': False,
+                'params': [
+                    'x',
+                    'y'
+                ],
+            }
         },
         'main': {
         }

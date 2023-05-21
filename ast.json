@@ -15,13 +15,33 @@
       ]
     },
     {
+      "line": 2,
+      "val": "t",
+      "name": "ARRAY",
+      "children": [
+        {
+          "val": "t",
+          "line": 2,
+          "name": "ID"
+        },
+        {
+          "val": 1,
+          "name": "NUM"
+        },
+        {
+          "val": 1,
+          "name": "NUM"
+        }
+      ]
+    },
+    {
       "name": "BODY",
       "children": [
         {
           "name": "ASSIGN",
           "children": [
             {
-              "line": 3,
+              "line": 4,
               "val": "n",
               "name": "ID"
             },
@@ -35,12 +55,12 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 4,
+              "line": 5,
               "val": "idx",
               "name": "ID"
             },
             {
-              "val": 8,
+              "val": 0,
               "name": "NUM"
             }
           ]
@@ -49,21 +69,36 @@
           "name": "ASSIGN",
           "children": [
             {
-              "line": 5,
-              "val": "sum",
+              "line": 6,
+              "val": "f",
               "name": "ID"
             },
             {
-              "name": "ADD",
+              "name": "CALL",
               "children": [
                 {
-                  "line": 5,
-                  "val": "sum",
+                  "val": "input",
+                  "line": 6,
                   "name": "ID"
-                },
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CALL",
+          "children": [
+            {
+              "val": "print",
+              "line": 7,
+              "name": "ID"
+            },
+            {
+              "name": "ARGS",
+              "children": [
                 {
-                  "line": 5,
-                  "val": "idx",
+                  "line": 7,
+                  "val": "f",
                   "name": "ID"
                 }
               ]

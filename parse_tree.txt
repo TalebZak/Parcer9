@@ -9,6 +9,17 @@ language
 │       ├── OPBRACKET
 │       ├── NUM
 │       └── CLBRACKET
+├── array_declaration
+│   ├── ARRAY
+│   ├── ID
+│   ├── size
+│   │   ├── OPBRACKET
+│   │   ├── NUM
+│   │   └── CLBRACKET
+│   └── size
+│       ├── OPBRACKET
+│       ├── NUM
+│       └── CLBRACKET
 └── main_body
     ├── BEGIN
     ├── statement
@@ -35,13 +46,13 @@ language
     │       │   └── ID
     │       ├── ASSIGN
     │       └── expression
-    │           ├── addop
-    │           │   └── value
-    │           │       └── variable
-    │           │           └── ID
-    │           ├── ADD
-    │           └── addop
-    │               └── value
-    │                   └── variable
-    │                       └── ID
+    │           └── function_call
+    │               └── ID
+    ├── statement
+    │   └── function_call
+    │       ├── ID
+    │       └── arguments
+    │           └── value
+    │               └── variable
+    │                   └── ID
     └── END

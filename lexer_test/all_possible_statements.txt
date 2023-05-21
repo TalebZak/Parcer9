@@ -1,0 +1,22 @@
+world[8][9];
+array a[6][6];
+define F2(){
+#testing calling a function inside a function 
+	call F1 (arr[6][1],7);
+
+}
+
+define F3(p5,p3){
+#testing loop
+	loop(p4 ! p3){
+		p4= p4+1;
+	}
+#testing return statement
+	return p4;
+}
+BEGIN
+#testing assignment statement
+arr[6][1]= call F2();
+#testing call stetement in arethmetic expression
+a[3][6]= call F3(5,3) + 5;
+END

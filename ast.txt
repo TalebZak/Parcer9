@@ -2,6 +2,10 @@ PROGRAM
 ├── WORLD
 │   ├── NUM
 │   └── NUM
+├── ARRAY
+│   ├── ID
+│   ├── NUM
+│   └── NUM
 └── BODY
     ├── ASSIGN
     │   ├── ID
@@ -9,8 +13,11 @@ PROGRAM
     ├── ASSIGN
     │   ├── ID
     │   └── NUM
-    └── ASSIGN
+    ├── ASSIGN
+    │   ├── ID
+    │   └── CALL
+    │       └── ID
+    └── CALL
         ├── ID
-        └── ADD
-            ├── ID
+        └── ARGS
             └── ID

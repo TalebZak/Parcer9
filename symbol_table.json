@@ -10,35 +10,64 @@
       "memory_index": 4,
       "value": 0
     },
+    "input": {
+      "type": "function",
+      "memory_index": 5,
+      "hasReturn": true,
+      "params": []
+    },
+    "print": {
+      "type": "function",
+      "memory_index": 6,
+      "hasReturn": false,
+      "params": [
+        "x"
+      ]
+    },
+    "place_wumpus": {
+      "type": "function",
+      "memory_index": 7,
+      "hasReturn": false,
+      "params": [
+        "x",
+        "y"
+      ]
+    },
     "world": {
       "type": "array",
       "rows": 1,
       "cols": 1,
       "memory_index": 5
     },
+    "t": {
+      "type": "array",
+      "rows": 1,
+      "cols": 1,
+      "memory_index": 6
+    },
     "5": {
       "type": "constant",
-      "memory_index": 6,
+      "memory_index": 7,
       "value": 5
     },
-    "8": {
+    "0": {
       "type": "constant",
-      "memory_index": 7,
-      "value": 8
+      "memory_index": 8,
+      "value": 0
     }
   },
   "main": {
     "n": {
       "type": "variable",
-      "declaration": 3
+      "declaration": 4
     },
     "idx": {
       "type": "variable",
-      "declaration": 4
-    },
-    "sum": {
-      "type": "variable",
       "declaration": 5
+    },
+    "f": {
+      "type": "variable",
+      "declaration": 6
     }
   }
 }

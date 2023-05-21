@@ -26,22 +26,4 @@ if [ $? -ne 0 ]; then
     echo "Error: parsing failed."
     exit 3
 fi
-
-# Run the semantics.py script
-python semantics.py
-
-# Check if the semantics.py script executed successfully
-if [ $? -ne 0 ]; then
-    echo "Error: semantics failed."
-    exit 3
-fi
-echo "Semantics passed."
-python codegen.py
-# Check if the codegen.py script executed successfully
-if [ $? -ne 0 ]; then
-    echo "Error: codegen failed."
-    exit 3
-fi
-echo "Codegen passed."
-
-echo "Script execution completed successfully."
+echo "Parsing was successful."
