@@ -35,39 +35,67 @@
     },
     "world": {
       "type": "array",
-      "rows": 1,
-      "cols": 1,
+      "rows": 5,
+      "cols": 5,
       "memory_index": 5
     },
-    "t": {
+    "a": {
       "type": "array",
       "rows": 1,
       "cols": 1,
-      "memory_index": 6
+      "memory_index": 30
+    },
+    "test1": {
+      "type": "function",
+      "params": [
+        "i",
+        "x"
+      ],
+      "hasReturn": true
+    },
+    "1": {
+      "type": "constant",
+      "memory_index": 31,
+      "value": 1
     },
     "5": {
       "type": "constant",
-      "memory_index": 7,
+      "memory_index": 32,
       "value": 5
     },
     "0": {
       "type": "constant",
-      "memory_index": 8,
+      "memory_index": 33,
       "value": 0
+    },
+    "10": {
+      "type": "constant",
+      "memory_index": 34,
+      "value": 10
     }
   },
   "main": {
     "n": {
       "type": "variable",
-      "declaration": 4
+      "declaration": 8
     },
     "idx": {
       "type": "variable",
-      "declaration": 5
+      "declaration": 9
     },
-    "f": {
+    "sum": {
       "type": "variable",
-      "declaration": 6
+      "declaration": 10
+    },
+    "a": {
+      "type": "variable",
+      "declaration": 11
+    }
+  },
+  "test1": {
+    "z": {
+      "type": "variable",
+      "declaration": 4
     }
   }
 }

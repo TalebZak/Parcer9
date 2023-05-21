@@ -6,6 +6,18 @@ PROGRAM
 │   ├── ID
 │   ├── NUM
 │   └── NUM
+├── FUNCTION
+│   ├── ID
+│   ├── PARAMS
+│   │   ├── ID
+│   │   └── ID
+│   ├── ASSIGN
+│   │   ├── ID
+│   │   └── ADD
+│   │       ├── ID
+│   │       └── NUM
+│   └── RETURN
+│       └── ID
 └── BODY
     ├── ASSIGN
     │   ├── ID
@@ -15,9 +27,41 @@ PROGRAM
     │   └── NUM
     ├── ASSIGN
     │   ├── ID
-    │   └── CALL
-    │       └── ID
-    └── CALL
-        ├── ID
-        └── ARGS
-            └── ID
+    │   └── ID
+    ├── ASSIGN
+    │   ├── ID
+    │   │   ├── NUM
+    │   │   └── NUM
+    │   └── NUM
+    ├── LOOP
+    │   ├── AND
+    │   │   ├── SMALL
+    │   │   │   ├── ID
+    │   │   │   └── ID
+    │   │   └── SMALL
+    │   │       ├── ID
+    │   │       └── NUM
+    │   ├── ASSIGN
+    │   │   ├── ID
+    │   │   └── CALL
+    │   │       └── ID
+    │   └── ASSIGN
+    │       ├── ID
+    │       └── ADD
+    │           ├── ID
+    │           │   ├── NUM
+    │           │   └── NUM
+    │           └── MUL
+    │               ├── ID
+    │               └── MUL
+    │                   ├── ID
+    │                   └── ID
+    └── IF
+        ├── SMALL
+        │   ├── ID
+        │   └── NUM
+        └── ASSIGN
+            ├── ID
+            └── ADD
+                ├── ID
+                └── NUM

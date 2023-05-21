@@ -20,6 +20,37 @@ language
 │       ├── OPBRACKET
 │       ├── NUM
 │       └── CLBRACKET
+├── function
+│   ├── DEFINE
+│   ├── ID
+│   ├── OPPARENT
+│   ├── function_def_parameters
+│   │   ├── ID
+│   │   ├── SEMI
+│   │   └── ID
+│   ├── CLPARENT
+│   ├── OPBRACE
+│   ├── statement
+│   │   └── assignment_expression
+│   │       ├── variable
+│   │       │   └── ID
+│   │       ├── ASSIGN
+│   │       └── expression
+│   │           ├── addop
+│   │           │   └── value
+│   │           │       └── variable
+│   │           │           └── ID
+│   │           ├── ADD
+│   │           └── addop
+│   │               └── value
+│   │                   └── NUM
+│   ├── statement
+│   │   └── return
+│   │       ├── RETURN
+│   │       └── value
+│   │           └── variable
+│   │               └── ID
+│   └── CLBRACE
 └── main_body
     ├── BEGIN
     ├── statement
@@ -46,13 +77,135 @@ language
     │       │   └── ID
     │       ├── ASSIGN
     │       └── expression
-    │           └── function_call
-    │               └── ID
+    │           └── addop
+    │               └── value
+    │                   └── variable
+    │                       └── ID
     ├── statement
-    │   └── function_call
-    │       ├── ID
-    │       └── arguments
-    │           └── value
-    │               └── variable
-    │                   └── ID
+    │   └── assignment_expression
+    │       ├── variable
+    │       │   ├── ID
+    │       │   └── array_idxing_expr
+    │       │       ├── placing
+    │       │       │   ├── OPBRACKET
+    │       │       │   ├── NUM
+    │       │       │   └── CLBRACKET
+    │       │       └── placing
+    │       │           ├── OPBRACKET
+    │       │           ├── NUM
+    │       │           └── CLBRACKET
+    │       ├── ASSIGN
+    │       └── expression
+    │           └── addop
+    │               └── value
+    │                   └── NUM
+    ├── statement
+    │   └── loop
+    │       ├── LOOP
+    │       ├── condition
+    │       │   ├── OPPARENT
+    │       │   ├── comparison
+    │       │   │   ├── value
+    │       │   │   │   └── variable
+    │       │   │   │       └── ID
+    │       │   │   ├── SMALL
+    │       │   │   └── value
+    │       │   │       └── variable
+    │       │   │           └── ID
+    │       │   ├── AND
+    │       │   ├── comparison
+    │       │   │   ├── value
+    │       │   │   │   └── variable
+    │       │   │   │       └── ID
+    │       │   │   ├── SMALL
+    │       │   │   └── value
+    │       │   │       └── NUM
+    │       │   └── CLPARENT
+    │       ├── OPBRACE
+    │       ├── statement
+    │       │   └── assignment_expression
+    │       │       ├── variable
+    │       │       │   └── ID
+    │       │       ├── ASSIGN
+    │       │       └── expression
+    │       │           └── function_call
+    │       │               └── ID
+    │       ├── statement
+    │       │   └── assignment_expression
+    │       │       ├── variable
+    │       │       │   └── ID
+    │       │       ├── ASSIGN
+    │       │       └── expression
+    │       │           ├── addop
+    │       │           │   └── value
+    │       │           │       └── variable
+    │       │           │           ├── ID
+    │       │           │           └── array_idxing_expr
+    │       │           │               ├── placing
+    │       │           │               │   ├── OPBRACKET
+    │       │           │               │   ├── NUM
+    │       │           │               │   └── CLBRACKET
+    │       │           │               └── placing
+    │       │           │                   ├── OPBRACKET
+    │       │           │                   ├── NUM
+    │       │           │                   └── CLBRACKET
+    │       │           ├── ADD
+    │       │           └── addop
+    │       │               ├── value
+    │       │               │   └── variable
+    │       │               │       └── ID
+    │       │               ├── MUL
+    │       │               ├── value
+    │       │               │   └── variable
+    │       │               │       └── ID
+    │       │               ├── MUL
+    │       │               └── value
+    │       │                   └── variable
+    │       │                       └── ID
+    │       └── statement
+    │           └── assignment_expression
+    │               ├── variable
+    │               │   ├── ID
+    │               │   └── array_idxing_expr
+    │               │       ├── placing
+    │               │       │   ├── OPBRACKET
+    │               │       │   ├── ID
+    │               │       │   └── CLBRACKET
+    │               │       └── placing
+    │               │           ├── OPBRACKET
+    │               │           ├── NUM
+    │               │           └── CLBRACKET
+    │               ├── ASSIGN
+    │               └── expression
+    │                   └── addop
+    │                       └── value
+    │                           └── NUM
+    ├── statement
+    │   └── if_statement
+    │       ├── IF
+    │       ├── condition
+    │       │   ├── OPPARENT
+    │       │   ├── comparison
+    │       │   │   ├── value
+    │       │   │   │   └── variable
+    │       │   │   │       └── ID
+    │       │   │   ├── SMALL
+    │       │   │   └── value
+    │       │   │       └── NUM
+    │       │   └── CLPARENT
+    │       ├── OPBRACE
+    │       └── statement
+    │           └── assignment_expression
+    │               ├── variable
+    │               │   └── ID
+    │               ├── ASSIGN
+    │               └── expression
+    │                   ├── addop
+    │                   │   └── value
+    │                   │       └── variable
+    │                   │           └── ID
+    │                   ├── ADD
+    │                   └── addop
+    │                       └── value
+    │                           └── NUM
     └── END

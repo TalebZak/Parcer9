@@ -240,9 +240,8 @@ def check_semantics(ast_node, symbol_table, scope="global"):
                 if not symbol_table["global"][node.children[0].val]["hasReturn"]:
                     raise Exception(f"Function {node.children[0].val} does not return a value")
                 # check if the number of arguments is correct
-                
-                if len(node.children) - 1 != len(symbol_table["global"][node.children[0].val]["params"]):
-                    raise Exception(f"function can't take no arguments")
+                if len(node.children) == 1 or len(node.children[1].children) != len(symbol_table["global"][node.children[0].val]["params"]):
+                    raise Exception(f"number of arguments passed to {node.children[0].val} is less")
                 continue
         
             elif node.name == "NUM":
@@ -366,6 +365,7 @@ def main():
     '''format printing of symbol table'''
     for key in symbol_table:
         print(key, symbol_table[key])
+        print("\n")
     print("No semantic errors found")
     # store the symbol table in a json file
     with open("symbol_table.json", "w") as f:

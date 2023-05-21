@@ -14,7 +14,7 @@
               "name": "OPBRACKET"
             },
             {
-              "val": 1,
+              "val": 5,
               "name": "NUM"
             },
             {
@@ -29,7 +29,7 @@
               "name": "OPBRACKET"
             },
             {
-              "val": 1,
+              "val": 5,
               "name": "NUM"
             },
             {
@@ -46,7 +46,7 @@
           "name": "ARRAY"
         },
         {
-          "val": "t",
+          "val": "a",
           "line": 2,
           "name": "ID"
         },
@@ -83,6 +83,142 @@
       ]
     },
     {
+      "name": "function",
+      "children": [
+        {
+          "name": "DEFINE"
+        },
+        {
+          "val": "test1",
+          "line": 3,
+          "name": "ID"
+        },
+        {
+          "name": "OPPARENT"
+        },
+        {
+          "name": "function_def_parameters",
+          "children": [
+            {
+              "val": "i",
+              "line": 3,
+              "name": "ID"
+            },
+            {
+              "name": "SEMI"
+            },
+            {
+              "val": "x",
+              "line": 3,
+              "name": "ID"
+            }
+          ]
+        },
+        {
+          "name": "CLPARENT"
+        },
+        {
+          "name": "OPBRACE"
+        },
+        {
+          "name": "statement",
+          "children": [
+            {
+              "name": "assignment_expression",
+              "children": [
+                {
+                  "name": "variable",
+                  "children": [
+                    {
+                      "val": "z",
+                      "line": 4,
+                      "name": "ID"
+                    }
+                  ]
+                },
+                {
+                  "name": "ASSIGN"
+                },
+                {
+                  "name": "expression",
+                  "children": [
+                    {
+                      "name": "addop",
+                      "children": [
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "name": "variable",
+                              "children": [
+                                {
+                                  "val": "x",
+                                  "line": 4,
+                                  "name": "ID"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "ADD"
+                    },
+                    {
+                      "name": "addop",
+                      "children": [
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "val": 1,
+                              "name": "NUM"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "statement",
+          "children": [
+            {
+              "name": "return",
+              "children": [
+                {
+                  "name": "RETURN"
+                },
+                {
+                  "name": "value",
+                  "children": [
+                    {
+                      "name": "variable",
+                      "children": [
+                        {
+                          "val": "z",
+                          "line": 5,
+                          "name": "ID"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "CLBRACE"
+        }
+      ]
+    },
+    {
       "name": "main_body",
       "children": [
         {
@@ -99,7 +235,7 @@
                   "children": [
                     {
                       "val": "n",
-                      "line": 4,
+                      "line": 8,
                       "name": "ID"
                     }
                   ]
@@ -141,7 +277,7 @@
                   "children": [
                     {
                       "val": "idx",
-                      "line": 5,
+                      "line": 9,
                       "name": "ID"
                     }
                   ]
@@ -182,8 +318,8 @@
                   "name": "variable",
                   "children": [
                     {
-                      "val": "f",
-                      "line": 6,
+                      "val": "sum",
+                      "line": 10,
                       "name": "ID"
                     }
                   ]
@@ -195,12 +331,22 @@
                   "name": "expression",
                   "children": [
                     {
-                      "name": "function_call",
+                      "name": "addop",
                       "children": [
                         {
-                          "val": "input",
-                          "line": 6,
-                          "name": "ID"
+                          "name": "value",
+                          "children": [
+                            {
+                              "name": "variable",
+                              "children": [
+                                {
+                                  "val": "idx",
+                                  "line": 10,
+                                  "name": "ID"
+                                }
+                              ]
+                            }
+                          ]
                         }
                       ]
                     }
@@ -214,26 +360,550 @@
           "name": "statement",
           "children": [
             {
-              "name": "function_call",
+              "name": "assignment_expression",
               "children": [
                 {
-                  "val": "print",
-                  "line": 7,
-                  "name": "ID"
-                },
-                {
-                  "name": "arguments",
+                  "name": "variable",
                   "children": [
                     {
-                      "name": "value",
+                      "val": "a",
+                      "line": 11,
+                      "name": "ID"
+                    },
+                    {
+                      "name": "array_idxing_expr",
+                      "children": [
+                        {
+                          "name": "placing",
+                          "children": [
+                            {
+                              "name": "OPBRACKET"
+                            },
+                            {
+                              "val": 1,
+                              "name": "NUM"
+                            },
+                            {
+                              "name": "CLBRACKET"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "placing",
+                          "children": [
+                            {
+                              "name": "OPBRACKET"
+                            },
+                            {
+                              "val": 2,
+                              "name": "NUM"
+                            },
+                            {
+                              "name": "CLBRACKET"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "ASSIGN"
+                },
+                {
+                  "name": "expression",
+                  "children": [
+                    {
+                      "name": "addop",
+                      "children": [
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "val": 5,
+                              "name": "NUM"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "statement",
+          "children": [
+            {
+              "name": "loop",
+              "children": [
+                {
+                  "name": "LOOP"
+                },
+                {
+                  "name": "condition",
+                  "children": [
+                    {
+                      "name": "OPPARENT"
+                    },
+                    {
+                      "name": "comparison",
+                      "children": [
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "name": "variable",
+                              "children": [
+                                {
+                                  "val": "idx",
+                                  "line": 12,
+                                  "name": "ID"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "SMALL"
+                        },
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "name": "variable",
+                              "children": [
+                                {
+                                  "val": "n",
+                                  "line": 12,
+                                  "name": "ID"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "AND"
+                    },
+                    {
+                      "name": "comparison",
+                      "children": [
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "name": "variable",
+                              "children": [
+                                {
+                                  "val": "sum",
+                                  "line": 12,
+                                  "name": "ID"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "SMALL"
+                        },
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "val": 10,
+                              "name": "NUM"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "CLPARENT"
+                    }
+                  ]
+                },
+                {
+                  "name": "OPBRACE"
+                },
+                {
+                  "name": "statement",
+                  "children": [
+                    {
+                      "name": "assignment_expression",
                       "children": [
                         {
                           "name": "variable",
                           "children": [
                             {
-                              "val": "f",
-                              "line": 7,
+                              "val": "idx",
+                              "line": 13,
                               "name": "ID"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ASSIGN"
+                        },
+                        {
+                          "name": "expression",
+                          "children": [
+                            {
+                              "name": "function_call",
+                              "children": [
+                                {
+                                  "val": "test1",
+                                  "line": 13,
+                                  "name": "ID"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "statement",
+                  "children": [
+                    {
+                      "name": "assignment_expression",
+                      "children": [
+                        {
+                          "name": "variable",
+                          "children": [
+                            {
+                              "val": "sum",
+                              "line": 14,
+                              "name": "ID"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ASSIGN"
+                        },
+                        {
+                          "name": "expression",
+                          "children": [
+                            {
+                              "name": "addop",
+                              "children": [
+                                {
+                                  "name": "value",
+                                  "children": [
+                                    {
+                                      "name": "variable",
+                                      "children": [
+                                        {
+                                          "val": "a",
+                                          "line": 14,
+                                          "name": "ID"
+                                        },
+                                        {
+                                          "name": "array_idxing_expr",
+                                          "children": [
+                                            {
+                                              "name": "placing",
+                                              "children": [
+                                                {
+                                                  "name": "OPBRACKET"
+                                                },
+                                                {
+                                                  "val": 0,
+                                                  "name": "NUM"
+                                                },
+                                                {
+                                                  "name": "CLBRACKET"
+                                                }
+                                              ]
+                                            },
+                                            {
+                                              "name": "placing",
+                                              "children": [
+                                                {
+                                                  "name": "OPBRACKET"
+                                                },
+                                                {
+                                                  "val": 1,
+                                                  "name": "NUM"
+                                                },
+                                                {
+                                                  "name": "CLBRACKET"
+                                                }
+                                              ]
+                                            }
+                                          ]
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "name": "ADD"
+                            },
+                            {
+                              "name": "addop",
+                              "children": [
+                                {
+                                  "name": "value",
+                                  "children": [
+                                    {
+                                      "name": "variable",
+                                      "children": [
+                                        {
+                                          "val": "idx",
+                                          "line": 14,
+                                          "name": "ID"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "MUL"
+                                },
+                                {
+                                  "name": "value",
+                                  "children": [
+                                    {
+                                      "name": "variable",
+                                      "children": [
+                                        {
+                                          "val": "sum",
+                                          "line": 14,
+                                          "name": "ID"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "MUL"
+                                },
+                                {
+                                  "name": "value",
+                                  "children": [
+                                    {
+                                      "name": "variable",
+                                      "children": [
+                                        {
+                                          "val": "sum",
+                                          "line": 14,
+                                          "name": "ID"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "statement",
+                  "children": [
+                    {
+                      "name": "assignment_expression",
+                      "children": [
+                        {
+                          "name": "variable",
+                          "children": [
+                            {
+                              "val": "a",
+                              "line": 15,
+                              "name": "ID"
+                            },
+                            {
+                              "name": "array_idxing_expr",
+                              "children": [
+                                {
+                                  "name": "placing",
+                                  "children": [
+                                    {
+                                      "name": "OPBRACKET"
+                                    },
+                                    {
+                                      "val": "num",
+                                      "line": 15,
+                                      "name": "ID"
+                                    },
+                                    {
+                                      "name": "CLBRACKET"
+                                    }
+                                  ]
+                                },
+                                {
+                                  "name": "placing",
+                                  "children": [
+                                    {
+                                      "name": "OPBRACKET"
+                                    },
+                                    {
+                                      "val": 0,
+                                      "name": "NUM"
+                                    },
+                                    {
+                                      "name": "CLBRACKET"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ASSIGN"
+                        },
+                        {
+                          "name": "expression",
+                          "children": [
+                            {
+                              "name": "addop",
+                              "children": [
+                                {
+                                  "name": "value",
+                                  "children": [
+                                    {
+                                      "val": 8,
+                                      "name": "NUM"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "statement",
+          "children": [
+            {
+              "name": "if_statement",
+              "children": [
+                {
+                  "name": "IF"
+                },
+                {
+                  "name": "condition",
+                  "children": [
+                    {
+                      "name": "OPPARENT"
+                    },
+                    {
+                      "name": "comparison",
+                      "children": [
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "name": "variable",
+                              "children": [
+                                {
+                                  "val": "sum",
+                                  "line": 17,
+                                  "name": "ID"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "name": "SMALL"
+                        },
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "val": 10,
+                              "name": "NUM"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "name": "CLPARENT"
+                    }
+                  ]
+                },
+                {
+                  "name": "OPBRACE"
+                },
+                {
+                  "name": "statement",
+                  "children": [
+                    {
+                      "name": "assignment_expression",
+                      "children": [
+                        {
+                          "name": "variable",
+                          "children": [
+                            {
+                              "val": "sum",
+                              "line": 18,
+                              "name": "ID"
+                            }
+                          ]
+                        },
+                        {
+                          "name": "ASSIGN"
+                        },
+                        {
+                          "name": "expression",
+                          "children": [
+                            {
+                              "name": "addop",
+                              "children": [
+                                {
+                                  "name": "value",
+                                  "children": [
+                                    {
+                                      "name": "variable",
+                                      "children": [
+                                        {
+                                          "val": "sum",
+                                          "line": 18,
+                                          "name": "ID"
+                                        }
+                                      ]
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "name": "ADD"
+                            },
+                            {
+                              "name": "addop",
+                              "children": [
+                                {
+                                  "name": "value",
+                                  "children": [
+                                    {
+                                      "val": 1,
+                                      "name": "NUM"
+                                    }
+                                  ]
+                                }
+                              ]
                             }
                           ]
                         }
