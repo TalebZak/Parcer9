@@ -2,9 +2,11 @@ import json
 from anytree import Node, RenderTree
 from anytree.importer import JsonImporter, DictImporter
 from anytree.exporter import JsonExporter, DotExporter
+
+import traceback
 import sys
 global const_line
-const_line = 0
+const_line = 5
 def cst_to_ast(cst_node):
     if cst_node.name == "array_declaration":
         ast_children = [cst_node.children[1], cst_to_ast(cst_node.children[2]), cst_to_ast(cst_node.children[3])]
@@ -156,13 +158,6 @@ def check_semantics(ast_node, symbol_table, scope="global"):
 
     if scope not in symbol_table:
         symbol_table[scope] = {}
-
-    if ast_node.name == "NUM" and ast_node.val not in symbol_table["global"]:
-            symbol_table["global"][ast_node.val] = {
-                "type": "int",
-                "memory_index": const_line
-            }
-            const_line += 1
         
 
     if ast_node.name == "FUNCTION":
@@ -173,6 +168,7 @@ def check_semantics(ast_node, symbol_table, scope="global"):
         symbol_table["global"][func_name] = {
             "type": "function",
             "params": [],
+            "hasReturn" : False
         }
 
         if ast_node.children[1]:
@@ -184,7 +180,7 @@ def check_semantics(ast_node, symbol_table, scope="global"):
 
         for child in ast_node.children[2:]:
             check_semantics(child, symbol_table, func_name)
-
+        return
     if ast_node.name == "ARRAY" or ast_node.name == "WORLD":
         array_name = ast_node.children[0].val if ast_node.name == "ARRAY" else "world"
         if array_name in symbol_table["global"]:
@@ -198,8 +194,19 @@ def check_semantics(ast_node, symbol_table, scope="global"):
         }
         if rows <= 0 or cols <= 0:
             raise Exception(f"Array {ast_node.children[0].val} size must have at least one row and one column")
-
-
+        return
+    if ast_node.name == "CALL":
+        # check if the function is defined
+        func_name = ast_node.children[0].val
+        if func_name not in symbol_table["global"]:
+            raise Exception(f"Function {func_name} is not defined")
+        # check if the number of arguments is correct
+        if len(ast_node.children) - 1 != len(symbol_table["global"][func_name]["params"]):
+            raise Exception(f"Function {func_name} takes {len(symbol_table['global'][func_name]['params'])} arguments but {len(ast_node.children) - 1} were given")
+        # check if the function returns a value, if it does raise an exception since it is called without an assignment
+        if symbol_table["global"][func_name]["hasReturn"]:
+            raise Exception(f"Function {func_name} returns a value but is called without an assignment")
+        return
     if ast_node.name == "ASSIGN":
         left_hand_side = ast_node.children[0]
 
@@ -229,21 +236,43 @@ def check_semantics(ast_node, symbol_table, scope="global"):
                 if node.val in symbol_table["global"] and symbol_table["global"][node.val]["type"] == "array":
                     if len(node.children) == 0:
                         raise Exception(f"Array {node.val} used without indexing")
-            if node.name == "CALL":
+            elif node.name == "CALL":
                 if node.children[0].val not in symbol_table["global"]:
                     raise Exception(f"Function {node.children[0].val} not defined")
                 if symbol_table["global"][node.children[0].val]["type"] != "function":
                     raise Exception(f"{node.children[0].val} is not a function")
+                
                 args_node = node.children[1]
                 if len(args_node.children) != len(symbol_table["global"][node.children[0].val]["params"]):
                     raise Exception(f"Wrong number of arguments for function {node.children[0].val}")
-
+                # if the does not have a return value, raise an exception
+                if not symbol_table["global"][node.children[0].val]["hasReturn"]:
+                    raise Exception(f"Function {node.children[0].val} does not return a value")
+            elif node.name == "NUM":
+                if node.val > 9999999999:
+                    raise Exception("Number out of range")
+                if node.val not in symbol_table["global"]:
+                    symbol_table["global"][node.val] = {
+                        "type": "constant",
+                        "memory_index": const_line,
+                        "value": node.val,
+                    }
+                    const_line += 1
+                return
             queue.extend(node.children)
+        return
     
     if ast_node.name == "RETURN":
+        if scope == "main":
+            raise Exception("Cannot return from main function")
         if len(ast_node.children) == 0:
+            # check if the function returns something in the past, if that's the case raise an exception
+            if symbol_table["global"][scope]["hasReturn"]:
+                raise Exception(f"Empty return is not allowed in function {scope}")
             return
         node = ast_node.children[0]
+        
+        symbol_table["global"][scope]["hasReturn"] = True
 
         if node.name == "ID":
 
@@ -256,11 +285,18 @@ def check_semantics(ast_node, symbol_table, scope="global"):
             # valid return if the variable is defined in the current scope or is a parameter of the current function(if the scope is not local or global)
             elif node.val not in symbol_table[scope] and (scope not in ["global", "main"] and node.val not in symbol_table["global"][scope]["params"]):
                 raise Exception(f"Variable {node.val} not defined")
-    
+        return
     if ast_node.name == "NUM":
         if ast_node.val > 9999999999:
             raise Exception("Number out of range")
-
+        if ast_node.val not in symbol_table["global"]:
+            symbol_table["global"][ast_node.val] = {
+                "type": "constant",
+                "memory_index": const_line,
+                "value": ast_node.val,
+            }
+            const_line += 1
+        return
     if ast_node.name == "BODY":
         scope = 'main'
 
@@ -284,6 +320,16 @@ def main():
         f.write(exporter.export(tree))
     symbol_table = {
         'global': {
+            'TRUE': {
+                "type": "constant",
+                'memory_index': 3,
+                'value': 1
+            },
+            'FALSE': {
+                "type": "constant",
+                'memory_index': 4,
+                'value': 0
+            },
         },
         'main': {
         }

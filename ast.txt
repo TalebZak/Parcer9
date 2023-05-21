@@ -15,22 +15,15 @@ PROGRAM
     │   └── NUM
     ├── ASSIGN
     │   ├── ID
-    │   └── NUM
-    └── LOOP
-        ├── SMALL
-        │   ├── ID
-        │   └── ID
-        ├── ASSIGN
-        │   ├── ID
-        │   └── ADD
-        │       ├── NUM
-        │       └── ADD
-        │           ├── ID
-        │           └── ADD
-        │               ├── ID
-        │               └── NUM
-        └── ASSIGN
+    │   └── ADD
+    │       ├── NUM
+    │       └── SUB
+    │           ├── MUL
+    │           │   ├── ID
+    │           │   └── ID
+    │           └── NUM
+    └── ASSIGN
+        ├── ID
+        └── ADD
             ├── ID
-            └── ADD
-                ├── ID
-                └── ID
+            └── ID

@@ -4,7 +4,7 @@
 <function_def_parameters>::= ID {SEMI ID}
 <variable> ::= ID [<array_idxing_expr>]
 <world_declaration>::= WORLD <size> <size> ENDL
-<statement>::= ( <function_call> | <loop> | <if_statement> | <assignment_expression> | <return> | <var_declaration> | <) ENDL
+<statement>::= ( <function_call> | <loop> | <if_statement> | <assignment_expression> | <return>| <) ENDL
 <return>::= RETURN [<value>]
 <function_call>::= CALL ID OPPARENT [<arguments>] CLPARENT
 <arguments> ::= <value> {SEMI <value>}

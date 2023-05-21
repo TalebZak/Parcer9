@@ -46,61 +46,35 @@ language
     │       │   └── ID
     │       ├── ASSIGN
     │       └── expression
+    │           ├── addop
+    │           │   └── value
+    │           │       └── NUM
+    │           ├── ADD
+    │           ├── addop
+    │           │   ├── value
+    │           │   │   └── variable
+    │           │   │       └── ID
+    │           │   ├── MUL
+    │           │   └── value
+    │           │       └── variable
+    │           │           └── ID
+    │           ├── SUB
     │           └── addop
     │               └── value
     │                   └── NUM
     ├── statement
-    │   └── loop
-    │       ├── LOOP
-    │       ├── condition
-    │       │   ├── OPPARENT
-    │       │   ├── comparison
-    │       │   │   ├── value
-    │       │   │   │   └── variable
-    │       │   │   │       └── ID
-    │       │   │   ├── SMALL
-    │       │   │   └── value
-    │       │   │       └── variable
-    │       │   │           └── ID
-    │       │   └── CLPARENT
-    │       ├── OPBRACE
-    │       ├── statement
-    │       │   └── assignment_expression
-    │       │       ├── variable
-    │       │       │   └── ID
-    │       │       ├── ASSIGN
-    │       │       └── expression
-    │       │           ├── addop
-    │       │           │   └── value
-    │       │           │       └── NUM
-    │       │           ├── ADD
-    │       │           ├── addop
-    │       │           │   └── value
-    │       │           │       └── variable
-    │       │           │           └── ID
-    │       │           ├── ADD
-    │       │           ├── addop
-    │       │           │   └── value
-    │       │           │       └── variable
-    │       │           │           └── ID
-    │       │           ├── ADD
-    │       │           └── addop
-    │       │               └── value
-    │       │                   └── NUM
-    │       ├── statement
-    │       │   └── assignment_expression
-    │       │       ├── variable
-    │       │       │   └── ID
-    │       │       ├── ASSIGN
-    │       │       └── expression
-    │       │           ├── addop
-    │       │           │   └── value
-    │       │           │       └── variable
-    │       │           │           └── ID
-    │       │           ├── ADD
-    │       │           └── addop
-    │       │               └── value
-    │       │                   └── variable
-    │       │                       └── ID
-    │       └── CLBRACE
+    │   └── assignment_expression
+    │       ├── variable
+    │       │   └── ID
+    │       ├── ASSIGN
+    │       └── expression
+    │           ├── addop
+    │           │   └── value
+    │           │       └── variable
+    │           │           └── ID
+    │           ├── ADD
+    │           └── addop
+    │               └── value
+    │                   └── variable
+    │                       └── ID
     └── END

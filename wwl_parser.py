@@ -220,7 +220,6 @@ class WumpusWorldParser:
             if not self.match_token("CLBRACE"):
                 raise SyntaxError("Expected CLBRACE")
             self.current_token += 1
-            children.append(Node("CLBRACE"))
         except SyntaxError as e:
             print(e)
             sys.exit(1)
@@ -243,7 +242,6 @@ class WumpusWorldParser:
             if not self.match_token("CLBRACE"):
                 raise SyntaxError("Expected CLBRACE")
             self.current_token += 1
-            children.append(Node("CLBRACE"))
             if self.match_token("ELSE"):
                 children.append(self.else_statement())
         except SyntaxError as e:
@@ -268,7 +266,6 @@ class WumpusWorldParser:
             if not self.match_token("CLBRACE"):
                 raise SyntaxError("Expected CLBRACE")
             self.current_token += 1
-            children.append(Node("CLBRACE"))
         except SyntaxError as e:
             print(e)
             sys.exit(1)

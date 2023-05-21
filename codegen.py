@@ -4,88 +4,61 @@ from anytree.importer import JsonImporter, DictImporter
 
 class Generator:
     def __init__(self, ast, symbol_table):
+        
         self.ast_root = ast
         self.symbol_table = symbol_table
-        self.data_memory = []
+        self.data_memory = ["+0000000000"]*1000
         self.code_memory = []
-        self.stack_pointer = 0
+        self.stack_pointer = 3
+        # define 3 registers to perform arithmetic operations
+        self.registers = self.data_memory[0:3]
+        # take all the global variables and put them in the data memory
+        for val, details in self.symbol_table["global"].items():
+            if details["type"] == "constant":
+                code = "+" + "0"*(10-len(str(details["value"]))) + str(details["value"])
+                self.data_memory[details["memory_index"]] = code
+                self.stack_pointer = max(self.stack_pointer, details["memory_index"])
+            elif details["type"] == "array":
+                for i in range(details["rows"]):
+                    for j in range(details["cols"]):
+                        code = "+" + "0"*10
+                        self.data_memory[self.stack_pointer] = code
+                        self.stack_pointer += 1
+    def register_generator(self):
+        # get the next register with yield
+        i = -1
+        while True:
+            i += 1
+            yield i%3
+            
     def generate(self):
+        self.register_iter = self.register_generator()
         self.generate_code(self.ast_root)
         self.print_data_memory()
         self.print_code_memory()
-
     def generate_code(self, node, scope="global"):
-        if node.name == "FUNCTION":
-            return
-        
-        if node.name == "WORLD":
-            # instantiate the world in the data memory from the symbol table
-            information = self.symbol_table[scope]["world"]
-            rows, columns = information["rows"], information["cols"]
-            # store the value of rows and columns in the data memory
-            rows_init = "0"*(10-len(str(rows))) + str(rows)
-            columns_init = "0"*(10-len(str(columns))) + str(columns)
-            self.data_memory.append("+"+rows_init)
-            self.data_memory.append("+"+columns_init)
-            curr_index = len(self.data_memory)
-            information["index"] = curr_index
-            # store the value of the world in the data memory
-            for i in range(rows):
-                for j in range(columns):
-                    self.data_memory.append("+"+"0"*10)
-            self.stack_pointer = len(self.data_memory)
-            return
-        
-        if node.name == "ARRAY":
-            # get the array name from the leftmost child
-            array_name = node.children[0].val
-            # get the array information from the symbol table
-            information = self.symbol_table[scope][array_name]
-            # get the rows of the array
-            rows = information["rows"]
-            # get the columns of the array
-            columns = information["cols"]
-            rows_init = "0"*(10-len(str(rows))) + str(rows)
-            columns_init = "0"*(10-len(str(columns))) + str(columns)
-            curr_index = len(self.data_memory)
-            information["index"] = curr_index
-            self.data_memory.append("+"+rows_init)
-            self.data_memory.append("+"+columns_init)
-            for i in range(rows):
-                for j in range(columns):
-                    self.data_memory.append("+"+"0"*10)
-            
-            self.stack_pointer = len(self.data_memory)
-            return
-        
-        if node.name == "ID":
-            # get the name of the variable
-            variable_name = node.val
-            curr_line = node.line
-            # get the information of the variable from the symbol table
-            information = self.symbol_table[scope][variable_name]
-            if information["line"] == curr_line:
-                information["index"] = len(self.data_memory)
-                self.data_memory.append("+"+"0"*10)
-            # get the index of the variable in the data memory
-            index = information["index"]
-            # generate the code for the value of the variable
-            
-            return
-        if node.name == "BODY":
-            scope = "main"
         if node.name == "ASSIGN":
             self.generate_code(node.children[0], scope)
             self.generate_code(node.children[1], scope)
-            return
-        if node.name == "ADD":
-            # if child[0] is a num store it in temp and push temp , else push the index of the variabl in the memory to the stack
-            if node.children[0].name == "NUM":
-                self.code_memory.append("+"+node.children[0].val)
+        if node.name == "ID":
+            # if the node line value is equal to declaration value from symbol table create a cell in memory with 0
+            if node.line == self.symbol_table[scope][node.value]["declaration"]:
+                code = "+" + "0"*10
+                self.data_memory[self.stack_pointer] = code
+                self.symbol_table[scope][node.value]["memory_index"] = self.stack_pointer
+                self.stack_pointer += 1
+            # load the value of the variable in a register
+            register = next(self.register_iter)
+            code = "+" + "0"*(3-len(str(register))) + str(register) + "0"*(6-len(str(self.symbol_table[scope][node.value]["memory_index"]))) + str(self.symbol_table[scope][node.value]["memory_index"])
 
-        for child in node.children:
-            self.generate_code(child, scope)
-    
+        if node.name == "NUM":
+            # load the value of the number in a register
+            register = next(self.register_iter)
+            code = "+" + "0"*(3-len(str(register))) + str(register) + "0"*(6-len(str(node.value))) + str(node.value)
+
+        
+        if node.name == "ADD":
+            
     def print_data_memory(self):
         # print a beautiful data memory
         print("------------------ Data Memory ------------------")

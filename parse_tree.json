@@ -182,8 +182,8 @@
                   "name": "variable",
                   "children": [
                     {
-                      "val": "sum",
-                      "line": 6,
+                      "val": "idx",
+                      "line": 7,
                       "name": "ID"
                     }
                   ]
@@ -201,36 +201,18 @@
                           "name": "value",
                           "children": [
                             {
-                              "val": 0,
+                              "val": 1,
                               "name": "NUM"
                             }
                           ]
                         }
                       ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        },
-        {
-          "name": "statement",
-          "children": [
-            {
-              "name": "loop",
-              "children": [
-                {
-                  "name": "LOOP"
-                },
-                {
-                  "name": "condition",
-                  "children": [
-                    {
-                      "name": "OPPARENT"
                     },
                     {
-                      "name": "comparison",
+                      "name": "ADD"
+                    },
+                    {
+                      "name": "addop",
                       "children": [
                         {
                           "name": "value",
@@ -248,7 +230,7 @@
                           ]
                         },
                         {
-                          "name": "SMALL"
+                          "name": "MUL"
                         },
                         {
                           "name": "value",
@@ -257,7 +239,7 @@
                               "name": "variable",
                               "children": [
                                 {
-                                  "val": "n",
+                                  "val": "idx",
                                   "line": 7,
                                   "name": "ID"
                                 }
@@ -268,109 +250,86 @@
                       ]
                     },
                     {
-                      "name": "CLPARENT"
+                      "name": "SUB"
+                    },
+                    {
+                      "name": "addop",
+                      "children": [
+                        {
+                          "name": "value",
+                          "children": [
+                            {
+                              "val": 1,
+                              "name": "NUM"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "statement",
+          "children": [
+            {
+              "name": "assignment_expression",
+              "children": [
+                {
+                  "name": "variable",
+                  "children": [
+                    {
+                      "val": "sum",
+                      "line": 8,
+                      "name": "ID"
                     }
                   ]
                 },
                 {
-                  "name": "OPBRACE"
+                  "name": "ASSIGN"
                 },
                 {
-                  "name": "statement",
+                  "name": "expression",
                   "children": [
                     {
-                      "name": "assignment_expression",
+                      "name": "addop",
                       "children": [
                         {
-                          "name": "variable",
+                          "name": "value",
                           "children": [
                             {
-                              "val": "idx",
-                              "line": 8,
-                              "name": "ID"
+                              "name": "variable",
+                              "children": [
+                                {
+                                  "val": "sum",
+                                  "line": 8,
+                                  "name": "ID"
+                                }
+                              ]
                             }
                           ]
-                        },
+                        }
+                      ]
+                    },
+                    {
+                      "name": "ADD"
+                    },
+                    {
+                      "name": "addop",
+                      "children": [
                         {
-                          "name": "ASSIGN"
-                        },
-                        {
-                          "name": "expression",
+                          "name": "value",
                           "children": [
                             {
-                              "name": "addop",
+                              "name": "variable",
                               "children": [
                                 {
-                                  "name": "value",
-                                  "children": [
-                                    {
-                                      "val": 1,
-                                      "name": "NUM"
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "ADD"
-                            },
-                            {
-                              "name": "addop",
-                              "children": [
-                                {
-                                  "name": "value",
-                                  "children": [
-                                    {
-                                      "name": "variable",
-                                      "children": [
-                                        {
-                                          "val": "idx",
-                                          "line": 8,
-                                          "name": "ID"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "ADD"
-                            },
-                            {
-                              "name": "addop",
-                              "children": [
-                                {
-                                  "name": "value",
-                                  "children": [
-                                    {
-                                      "name": "variable",
-                                      "children": [
-                                        {
-                                          "val": "idx",
-                                          "line": 8,
-                                          "name": "ID"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "ADD"
-                            },
-                            {
-                              "name": "addop",
-                              "children": [
-                                {
-                                  "name": "value",
-                                  "children": [
-                                    {
-                                      "val": 1,
-                                      "name": "NUM"
-                                    }
-                                  ]
+                                  "val": "idx",
+                                  "line": 8,
+                                  "name": "ID"
                                 }
                               ]
                             }
@@ -379,80 +338,6 @@
                       ]
                     }
                   ]
-                },
-                {
-                  "name": "statement",
-                  "children": [
-                    {
-                      "name": "assignment_expression",
-                      "children": [
-                        {
-                          "name": "variable",
-                          "children": [
-                            {
-                              "val": "sum",
-                              "line": 9,
-                              "name": "ID"
-                            }
-                          ]
-                        },
-                        {
-                          "name": "ASSIGN"
-                        },
-                        {
-                          "name": "expression",
-                          "children": [
-                            {
-                              "name": "addop",
-                              "children": [
-                                {
-                                  "name": "value",
-                                  "children": [
-                                    {
-                                      "name": "variable",
-                                      "children": [
-                                        {
-                                          "val": "sum",
-                                          "line": 9,
-                                          "name": "ID"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            },
-                            {
-                              "name": "ADD"
-                            },
-                            {
-                              "name": "addop",
-                              "children": [
-                                {
-                                  "name": "value",
-                                  "children": [
-                                    {
-                                      "name": "variable",
-                                      "children": [
-                                        {
-                                          "val": "idx",
-                                          "line": 9,
-                                          "name": "ID"
-                                        }
-                                      ]
-                                    }
-                                  ]
-                                }
-                              ]
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                },
-                {
-                  "name": "CLBRACE"
                 }
               ]
             }
